@@ -1,0 +1,28 @@
+﻿@model List<SmartERP.Entity.Model.User.Notification>
+
+<ul class="notification-body">
+    @{
+        if (Model.Any())
+        {
+            foreach (var notification in Model)
+            {
+                <li>
+                    <span class="padding-10 unread">
+
+                        <em class="badge padding-5 no-border-radius bg-color-blueLight pull-left margin-right-5">
+                            <i class="fa fa-user fa-fw fa-2x"></i>
+                        </em>
+
+                        <span>
+                            @notification.Message
+                            <br>
+                            <span class="pull-right font-xs text-muted"><i>@notification.CreatedTimeStamp.GetValueOrDefault().ToShortDateString()</i></span>
+                        </span>
+
+                    </span>
+                </li>
+            }
+        }
+    }
+</ul>
+

@@ -1,0 +1,223 @@
+﻿@model WorkFlowViewModel
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                @ViewBag.PageHeader
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+        </div>
+        <!-- end col -->
+
+    </div>
+    <!-- end row -->
+    <!--
+      The ID "widget-grid" will start to initialize all widgets below
+      You do not need to use widgets if you dont want to. Simply remove
+      the <section></section> and you can use wells or panels instead
+      -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="well">
+                    <form action="@Url.Action("WorkFlowMasterDetail", "Configuration")" method="POST" class="form-horizontal" name="configureComapnyForm" id="configureComapnyForm">
+                        <fieldset>
+                            <legend> @ViewBag.PageHeader </legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Work Flow Name </label>
+                                        <div class="col-md-6">
+                                            @Html.HiddenFor(m=>m.Mode, new { @id = "mode" })
+                                            @Html.TextBoxFor(m => m.WorkFlowMaster.WorkFlow, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Work Flow Description</label>
+                                        <div class="col-md-6">
+                                            @Html.TextBoxFor(m => m.WorkFlowMaster.Description, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                     
+                            
+
+                                <!-- Widget ID (each widget will need unique ID)-->
+                                <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-editbutton="false">
+                                    <!-- widget options:
+                usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+
+                data-widget-colorbutton="false"
+                data-widget-editbutton="false"
+                data-widget-togglebutton="false"
+                data-widget-deletebutton="false"
+                data-widget-fullscreenbutton="false"
+                data-widget-custombutton="false"
+                data-widget-collapsed="true"
+                data-widget-sortable="false"
+
+                -->
+                                    <header>
+                                        <span class="widget-icon"> <i class="fa fa-table"></i> </span>
+                                        <h2>@ViewBag.Title </h2>
+                                       
+                                    </header>
+
+                                    <!-- widget div-->
+                                    <div>
+
+                                        <!-- widget edit box -->
+                                        <div class="jarviswidget-editbox">
+                                            <!-- This area used as dropdown edit box -->
+
+                                        </div>
+                                        <!-- end widget edit box -->
+                                        <!-- widget content -->
+                                        <div class="widget-body no-padding">
+
+                                            <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                                <thead>
+                                                    <tr>
+
+                                                        <th data-hide="phone">WorkFlow Code</th>
+                                                        <th>Work flow</th>
+                                                        <th>Description</th>
+
+                                                        <th>Action</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    @if (Model != null && Model.WorkFlowDetail != null && Model.WorkFlowDetail.Any())
+                                                    {
+
+                                                        
+                                                        for(var j=0; Model.WorkFlowDetail.Count >j; j++)
+                                                        {
+                                                            <tr>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Condition , new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Description, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Stepnumber, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>
+                                                                    @Html.HiddenFor(a => Model.WorkFlowDetail[j].UniqueId)
+                                                                    @if (j > 0)
+                                                                    {
+                                                                        
+                                                                        <button class="btn btn-default" type="submit" onclick="$('#mode').val('@Model.WorkFlowDetail[j].UniqueId');">
+                                                                            <i class="fa fa-minus"></i>
+                                                                            Remove
+                                                                        </button>
+                                                                    }
+                                                                  
+                                                                </td>
+                                                            </tr>
+                                                           
+                                                        }
+                                                        @*foreach (var item in Model.WorkFlowDetail.ToArray())
+                                                        {
+                                                            <tr>
+                                                                <td>@item.Id</td>
+                                                                <td>@item.Condition</td>
+                                                                <td>@item.Description</td>
+
+                                                                <td><a class="btn btn-default" href="@Url.Action("WorkFlowMasterDetail", "Configuration", new { @id = item.Id })"><i class="fa fa-cog"></i> Edit</a></td>
+                                                            </tr>
+                                                        }*@
+                                                    }
+                                                </tbody>
+                                            </table>
+
+                                        </div>
+                                        <!-- end widget content -->
+
+                                    </div>
+                                    <!-- end widget div -->
+
+                                </div>
+                                <!-- end widget -->
+
+                               
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit" onclick="$('#mode').val('ADDLINE');">
+                                        <i class="fa fa-plus"></i>
+                                        Add
+                                    </button>
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i>
+                                        Save
+                                    </button>
+                                    <a class="btn btn-primary" href="@Request.UrlReferrer" >
+                                        <i class="fa fa-undo"></i>
+                                        Revert
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+
+        </div>
+
+        <!-- end row -->
+
+    </section>
+    <!-- end widget grid -->
+
+</div>
+<!-- END MAIN CONTENT -->
+
+@section pagespecific {
+    <!-- PAGE RELATED PLUGIN(S)
+        <script src="..."></script>-->
+    <script src="~/Scripts/plugin/jquery-nestable/jquery.nestable.min.js"></script>
+
+    <script src="~/Scripts/custom.js"></script>
+
+}
+
+
+
+
+

@@ -1,0 +1,25 @@
+﻿@model List<SmartERP.Entity.Model.User.Notification>
+
+<ul class="notification-body">
+    @{
+        if (Model.Any())
+        {
+            foreach (var message in Model)
+            {
+                <li>
+                    <span class="unread">
+                        <a href="javascript:void(0);" class="msg">
+                            <img src="~/Content/img/avatars/1.png" alt="" class="air air-top-left margin-top-5" width="40" height="40" />
+                            <span class="from">@message.LinkName <i class="icon-paperclip"></i></span>
+                            <time>@message.CreatedTimeStamp.GetValueOrDefault().ToShortDateString() </time>
+                            <span class="msg-body">@message.Message</span>
+                        </a>
+                    </span>
+                </li>
+            }
+        }
+    }
+</ul>
+
+
+

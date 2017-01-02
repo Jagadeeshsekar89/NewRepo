@@ -1,0 +1,205 @@
+﻿@model UserViewModel
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                @*TODO: Change this add/edit based on user creation *@
+                Add/Edit User
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+        </div>
+        <!-- end col -->
+
+    </div>
+    <!-- end row -->
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="well">
+                    @using (Html.BeginForm("SubmitUser", "Account", FormMethod.Post, new { enctype = "multipart/form-data", @id = "userAddEditForm", @class = "form-horizontal" }))
+                    {
+                    @Html.HiddenFor(m => m.user.Id)
+                        <fieldset>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Employee ID</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.EmployeeID, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">User Code</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.UserCode, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">First Name</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.FirstName, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Last Name</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.LastName, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">User Name</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.Username, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">SSO</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.SSO, new { @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Mobile</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.MobileNumber, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Email</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.EmailID, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Password</label>
+                                        <div class="col-md-6 col-xs-12">
+                                            @Html.TextBoxFor(m => m.user.Password, new { @required = "required", @class = "form-control" })
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.user.EmployeeID, new { @class = "col-md-4 control-label" })*@
+                                        @Html.LabelFor(model => Model.user.ImageUrl, "Photo", new { @class = "col-md-4 control-label" })
+                                        <div class="col-md-6 col-xs-12">
+                                            <input type="file" id="txtPhoto" name="upload" class="form-control" accept="image/*" onchange="showImage(this)" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-12 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <div class="col-md-6 col-xs-12">
+                                            @if (Model.user != null && !string.IsNullOrEmpty(Model.user.ImageUrl))
+                                            {
+                                            <img id="user_Photo" src="@Model.user.ImageUrl" height="130" width="120" />
+
+                                            }
+                                            else
+                                            {
+                                            <img id="user_Photo" height="130" width="120" />
+                                            }
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit">
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->

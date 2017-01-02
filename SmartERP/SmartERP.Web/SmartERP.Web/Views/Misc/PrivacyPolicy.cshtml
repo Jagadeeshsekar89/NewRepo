@@ -1,0 +1,398 @@
+﻿@model PrivacyPolicyViewModel
+
+<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                Security Policy
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+        </div>
+        <!-- end col -->
+
+    </div>
+    <!-- end row -->
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="well">
+                    <form action="@Url.Action("Insert", "Misc")" method="POST" id="privacypolicy-form" class="form-horizontal">
+                        @Html.HiddenFor(m => m.security.Id)
+                        <fieldset>
+                            <legend>Login</legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        @*@Html.LabelFor(m=>m.security.IsVirtualKeyboard, new { @class = "col-md-4 control-label" })*@
+                                        <label class="col-md-4 control-label">Virtual Keyboard</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsVirtualKeyboard" class="onoffswitch-checkbox" id="security_IsVirtualKeyboard">*@
+                                                @Html.CheckBoxFor(m => m.security.IsVirtualKeyboard, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsVirtualKeyboard">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Forgot Password</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsForgotPassword" class="onoffswitch-checkbox" id="security_IsForgotPassword">*@
+                                                @Html.CheckBoxFor(m => m.security.IsForgotPassword, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsForgotPassword">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">IP Restriction</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsIpRestricted" class="onoffswitch-checkbox" id="security_IsIpRestricted">*@
+                                                @Html.CheckBoxFor(m => m.security.IsIpRestricted, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsIpRestricted">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" rel="tooltip" data-placement="top" data-original-title="IP address to allow">IP Address <i class="fa fa-question-circle"></i></label>
+                                        <div class="col-md-8">
+                                            @Html.TextAreaFor(m => m.security.IpAddress, new { @class = "form-control", @placeholder = "Enter ip address as comma separated", @rows = "4" })
+                                            @*<textarea class="form-control" placeholder="Enter ip address as comma separated" rows="4"></textarea>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Captcha Image</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsCaptchaRequired" class="onoffswitch-checkbox" id="security_IsCaptchaRequired">*@
+                                                @Html.CheckBoxFor(m => m.security.IsCaptchaRequired, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsCaptchaRequired">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Remote Access</label>
+                                        <div class="col-md-8">
+                                            @*Need to Load from Users Table*@
+                                            <select multiple class="select2" id="remoteAccessUsers" placeholder="Enter username to provide access">
+                                                @foreach (var item in Model.UserList)
+                                                {
+                                                    if (Model.security != null && !string.IsNullOrEmpty(Model.security.RemoteAccess) &&
+                                                    Model.security.RemoteAccess.Split(',').Any(u => u.Contains(item.Value)))
+                                                    {
+                                                    <option selected="selected" value="@item.Value">@item.Text</option>
+                                                    }
+                                                    else {
+                                                    <option value="@item.Value">@item.Text</option>
+                                                    }
+                                                }
+                                            </select>
+                                            @Html.HiddenFor(m=>m.security.RemoteAccess)
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Password</legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Password Expiry</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(m => m.security.ExpiryDays, new { @class = "form-control" })
+                                                @*<input class="form-control" id="append" type="text">*@
+                                                <span class="input-group-addon">days</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label" for="firstpasswordchange">First Password Change</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsFirstPwdChange" class="onoffswitch-checkbox" id="security_IsFirstPwdChange">*@
+                                                @Html.CheckBoxFor(m => m.security.IsFirstPwdChange, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsFirstPwdChange">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Wrong Password Attempts</label>
+                                        <div class="col-md-3">
+                                            @Html.TextBoxFor(m => m.security.LockoutCount, new { @class = "form-control" })
+                                            @*<input class="form-control" type="text">*@
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset>
+                            <legend>Password Change</legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Minimum</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(m => m.security.MinLength, new { @class = "form-control" })
+                                                @*<input class="form-control" id="append" type="text">*@
+                                                <span class="input-group-addon">Character</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Maximum</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                @Html.TextBoxFor(m => m.security.MaxLength, new { @class = "form-control" })
+                                                @*<input class="form-control" id="append" type="text">*@
+                                                <span class="input-group-addon">Character</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Alphabetics Required</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsAlphaMust" class="onoffswitch-checkbox" id="security_IsAlphaMust">*@
+                                                @Html.CheckBoxFor(m => m.security.IsAlphaMust, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsAlphaMust">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Numeric Required</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsNumericMust" class="onoffswitch-checkbox" id="security_IsNumericMust">*@
+                                                @Html.CheckBoxFor(m => m.security.IsNumericMust, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsNumericMust">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Special Character Required</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsSplCharMust" class="onoffswitch-checkbox" id="security_IsSplCharMust">*@
+                                                @Html.CheckBoxFor(m => m.security.IsSplCharMust, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsSplCharMust">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="hide">
+                            <legend>Multi Factor Authentication</legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Enable Multi Factor Authentication</label>
+                                        <div class="col-md-3">
+                                            <span class="onoffswitch">
+                                                <input type="checkbox" name="start_interval" class="onoffswitch-checkbox" id="alphaPassword">
+                                                <label class="onoffswitch-label" for="alphaPassword">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Multi Factor Authentication Grid</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input class="form-control" id="append" type="text">
+                                                <span class="input-group-addon">Length</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+                        <fieldset class="hide">
+                            <legend>Session</legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Set Idle Timeout Workforce</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input class="form-control" id="append" type="text">
+                                                <span class="input-group-addon">Minute</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Set Idle Timeout Others</label>
+                                        <div class="col-md-3">
+                                            <div class="input-group">
+                                                <input class="form-control" id="append" type="text">
+                                                <span class="input-group-addon">Minute</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Close Browser When Session Expires</label>
+                                        <div class="col-md-3">
+                                            <span class="onoffswitch">
+                                                <input type="checkbox" name="start_interval" class="onoffswitch-checkbox" id="closeBrowser">
+                                                <label class="onoffswitch-label" for="closeBrowser">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Auto Logout</label>
+                                        <div class="col-md-3">
+                                            <span class="onoffswitch">
+                                                <input type="checkbox" name="start_interval" class="onoffswitch-checkbox" id="autoLogout">
+                                                <label class="onoffswitch-label" for="autoLogout">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </fieldset>
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i>
+                                        Update
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->

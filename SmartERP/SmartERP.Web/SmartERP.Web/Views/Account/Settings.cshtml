@@ -1,0 +1,205 @@
+﻿<!-- MAIN CONTENT -->
+<div id="content">
+
+    <!-- row -->
+    <div class="row">
+
+        <!-- col -->
+        <div class="col-xs-12 col-sm-7 col-md-7 col-lg-4">
+            <h1 class="page-title txt-color-blueDark">
+                <!-- PAGE HEADER -->
+                Settings
+            </h1>
+        </div>
+        <!-- end col -->
+        <!-- right side of the page with the sparkline graphs -->
+        <!-- col -->
+        <div class="col-xs-12 col-sm-5 col-md-5 col-lg-8">
+
+        </div>
+        <!-- end col -->
+
+    </div>
+    <!-- end row -->
+    <!--
+        The ID "widget-grid" will start to initialize all widgets below
+        You do not need to use widgets if you dont want to. Simply remove
+        the <section></section> and you can use wells or panels instead
+        -->
+    <!-- widget grid -->
+    <section id="widget-grid" class="">
+
+        <!-- row -->
+        <div class="row">
+
+            <!-- NEW WIDGET START -->
+            <article class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                <div class="well">
+                    <form action="@Url.Action("ChangeSettings", "Account")" method="POST" id="settings-form" class="form-horizontal">
+                        @{
+                            var selectedMenuSkin = Settings.CurrentTheme.Split(' ');
+                            <fieldset>
+                                <legend>Appearance</legend>
+                                <div class="row">
+                                    <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Skins</label>
+                                            <div class="col-md-10">
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-4")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-4">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-4">
+                                                    }
+                                                    <span>PixelSmash</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-6")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-6">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-6">
+                                                    }
+                                                    <span>Material Design</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-1")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-1">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-1">
+                                                    }
+                                                    <span>Dark Elegance</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-3")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-3">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-3">
+                                                    }
+                                                    <span>Orange</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-0")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-0">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-0">
+                                                    }
+                                                    <span>Grey</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin[0] == "smart-style-2")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" checked="checked" value="smart-style-2">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="skin" value="smart-style-2">
+                                                    }
+                                                    <span>Ultra Light</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label class="col-md-2 control-label">Menu Position</label>
+                                            @* Add the below values to the <body> class *@
+                                            <div class="col-md-10">
+                                                <label class="radio">
+                                                    @if (selectedMenuSkin.Count() > 1 && !string.IsNullOrEmpty(selectedMenuSkin[1]) && selectedMenuSkin[1] == "menu-on-top")
+                                                    {
+                                                        <input type="radio" class="radiobox" name="menuPosition" checked="checked" value="menu-on-top">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="menuPosition" value="menu-on-top">
+                                                    }
+                                                    <span>Top</span>
+                                                </label>
+                                                <label class="radio">
+                                                    @if ((selectedMenuSkin.Count() > 1 && string.IsNullOrEmpty(selectedMenuSkin[1])) ||
+selectedMenuSkin.Count() == 1)
+                                                    {
+                                                        <input type="radio" class="radiobox" name="menuPosition" checked="checked" value="">
+                                                    }
+                                                    else
+                                                    {
+                                                        <input type="radio" class="radiobox" name="menuPosition" value="">
+                                                    }
+                                                    <span>Left</span>
+                                                </label>
+                                            </div>
+                                        </div>
+                                        @{
+                                            if (User != null && User.roles != null && User.roles.Any())
+                                            {
+                                                <div class="form-group">
+                                                    <label class="col-md-2 control-label">Change Role</label>
+                                                    <div class="col-md-2">
+                                                        <select name="roleCode" class="form-control">
+                                                            @foreach (var role in User.roles)
+                                                            {
+                                                                if (Session["PrimaryRoleCode"] != null && string.Compare(role.Split(',')[0], Session["PrimaryRoleCode"].ToString(), StringComparison.OrdinalIgnoreCase) == 0)
+                                                                {
+                                                                    <option selected="selected" value="@role.Split(',')[0]">@role.Split(',')[1]</option>
+                                                                }
+                                                                else
+                                                                {
+                                                                    <option value="@role.Split(',')[0]">@role.Split(',')[1]</option>
+                                                                }
+                                                            }
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    </div>
+                                </div>
+                            </fieldset>
+                        }
+                        <div class="form-actions">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <button class="btn btn-primary" type="submit">
+                                        <i class="fa fa-save"></i>
+                                        Save
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+            </article>
+            <!-- WIDGET END -->
+
+        </div>
+        <!-- end row -->
+        <!-- row -->
+
+        <div class="row">
+
+            <!-- a blank row to get started -->
+            <div class="col-sm-12">
+                <!-- your contents here -->
+            </div>
+
+        </div>
+
+        <!-- end row -->
+    </section>
+    <!-- end widget grid -->
+</div>
+<!-- END MAIN CONTENT -->

@@ -1,0 +1,285 @@
+﻿    <!-- Left panel : Navigation area -->
+<!-- Note: This width of the aside area can be adjusted through LESS variables -->
+<aside id="left-panel">
+
+    <!-- User info -->
+    @*@{ Html.RenderPartial("_CurrentUser"); }*@
+    <!-- end user info -->
+    <!-- NAVIGATION : This navigation is also responsive
+
+    To make this navigation dynamic please make sure to link the node
+    (the reference to the nav > ul) after page load. Or the navigation
+    will not initialize.
+    -->
+    <nav>
+        <!-- NOTE: Notice the gaps after each icon usage <i></i>..
+        Please note that these links work a bit different than
+        traditional href="" links. See documentation for details.
+        -->
+
+        <ul>
+            @{ 
+                var roleCode = string.Empty;
+                if(Session["PrimaryRoleCode"] != null)
+                {
+                    roleCode = Session["PrimaryRoleCode"].ToString();
+                }
+                Html.RenderAction("DynamicMenu", "Home", new { @roleCode = roleCode }); }
+
+            @*<li class="@Html.RouteIf("index", "active")">
+                <a href="@Url.Action("index", "")" title="Dashboard"><i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Dashboard</span></a>
+                @*<ul>
+                    <li class="@Html.RouteIf("index", "active")">
+                        <a href="@Url.Action("index", "home")" title="Dashboard"><span class="menu-item-parent">Analytics Dashboard</span></a>
+                    </li>
+                    <li class="@Html.RouteIf("social", "active")">
+                        <a href="@Url.Action("social", "home")" title="Dashboard"><span class="menu-item-parent">Social Wall</span></a>
+                    </li>
+                </ul>
+            </li>
+           
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-building txt-color-blue"></i> <span class="menu-item-parent">Company</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-building-o"></i> <span class="menu-item-parent">Head Office</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">HO Unit</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Sales Point</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="@Url.Action("Users","Account")" title="Dashboard"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Users</span></a>
+            </li>
+            <li>
+                <a href="@Url.Action("UnlockUsers","Account")" title="Dashboard"><i class="fa fa-lg fa-fw fa-users"></i> <span class="menu-item-parent">Unlock Users</span></a>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Branch Controls</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Common Customer</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Customer Controls</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-money"></i> Service Charge</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-calendar"></i> <span class="menu-item-parent">Grace Days</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-calendar"></i> Credit Days</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-calendar"></i> <span class="menu-item-parent">Debit Note BCD Days</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-th"></i> Branch Master</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-th"></i> <span class="menu-item-parent">Company Master</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-th"></i> Document Master</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Accounts Master</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Account Group</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Bank Ledger</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Bank Challan Type</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">General Ledger</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Outside Supplier</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Expenditure Ledger</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Expenditure Breakup</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Narrations List</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> GJV Control</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Dealer</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Sales Account</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Deposit Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> ECMS Virtual A/c No entry</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Service Station</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Sales Account</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Deposit Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Material Transfer Account</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Service Bill Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> ECMS Virtual A/c No entry</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Outside Supplier</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Purchase Account</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Deposit Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Material Transfer Account</a>
+                    </li>
+                </ul>
+            </li>
+            <li class="top-menu-invisible">
+                <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">Staff</span></a>
+                <ul>
+                    <li class="">
+                        <a href="privacy-policy.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-gear"></i> <span class="menu-item-parent">Main Account</span></a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Advance Transfer Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> Material Transfer Account</a>
+                    </li>
+                    <li class="">
+                        <a href="roles.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-picture-o"></i> <span class="menu-item-parent">Service Bill Account</span></a>
+                    </li>
+                    <li>
+                        <a href="index.html"><i class="fa fa-cube"></i> ECMS Virtual A/c No entry</a>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-truck"></i> <span class="menu-item-parent">Transporter</span></a>
+            </li>
+            <li>
+                <a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-university"></i> <span class="menu-item-parent">Bank</span></a>
+            </li>
+            <li>
+                <a href="index.html" title="Dashboard"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Customer</span></a>
+            </li>*@
+
+            @*<li class="@Html.RouteIf("forms", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Forms</span></a>
+                <ul>
+                    <li class="@Html.RouteIf("smartelements", "active")">
+                        <a href="@Url.Action("smartelements", "forms")">Smart Form Elements</a>
+                    </li>
+                    <li class="@Html.RouteIf("templates", "active")">
+                        <a href="@Url.Action("templates", "forms")">Smart Form Layouts</a>
+                    </li>
+                    <li class="@Html.RouteIf("validation", "active")">
+                        <a href="@Url.Action("validation", "forms")">Smart Form Validation</a>
+                    </li>
+                    <li class="@Html.RouteIf("bootstrap", "active")">
+                        <a href="@Url.Action("bootstrap", "forms")">Bootstrap Form Elements</a>
+                    </li>
+                    <li class="@Html.RouteIf("plugins", "active")">
+                        <a href="@Url.Action("plugins", "forms")">Form Plugins</a>
+                    </li>
+                    <li class="@Html.RouteIf("wizards", "active")">
+                        <a href="@Url.Action("wizards", "forms")">Wizards</a>
+                    </li>
+                    <li class="@Html.RouteIf("editors", "active")">
+                        <a href="@Url.Action("editors", "forms")">Bootstrap Editors</a>
+                    </li>
+                    <li class="@Html.RouteIf("dropzone", "active")">
+                        <a href="@Url.Action("dropzone", "forms")">Dropzone </a>
+                    </li>
+                    <li class="@Html.RouteIf("cropping", "active")">
+                        <a href="@Url.Action("cropping", "forms")">Image Cropping <span class="badge pull-right inbox-badge bg-color-yellow">new</span></a>
+                    </li>
+                </ul>
+            </li>
+            <li class="@Html.RouteIf("misc", "active")">
+                <a href="#"><i class="fa fa-lg fa-fw fa-windows"></i> <span class="menu-item-parent">Miscellaneous</span></a>
+                <ul>
+                    <li>
+                        <a href="@Url.Action("index", "landing", new { area = "Landing" })" target="_blank">Landing Page <i class="fa fa-external-link"></i></a>
+                    </li>
+                    <li class="@Html.RouteIf("pricing", "active")">
+                        <a href="@Url.Action("pricing", "misc")">Pricing Tables</a>
+                    </li>
+                    <li class="@Html.RouteIf("invoice", "active")">
+                        <a href="@Url.Action("invoice", "misc")">Invoice</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("login", "account")" target="_top">Login</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("register", "account")" target="_top">Register</a>
+                    </li>
+                    <li>
+                        <a href="@Url.Action("lock", "account")" target="_top">Locked Screen</a>
+                    </li>
+                    <li class="@Html.RouteIf("error404", "active")">
+                        <a href="@Url.Action("error404", "misc")">Error 404</a>
+                    </li>
+                    <li class="@Html.RouteIf("error500", "active")">
+                        <a href="@Url.Action("error500", "misc")">Error 500</a>
+                    </li>
+                    <li class="@Html.RouteIf("blank", "active")">
+                        <a href="@Url.Action("blank", "misc")">Blank Page</a>
+                    </li>
+                    <li class="@Html.RouteIf("emailtemplate", "active")">
+                        <a href="@Url.Action("emailtemplate", "misc")">Email Template</a>
+                    </li>
+                    <li class="@Html.RouteIf("search", "active")">
+                        <a href="@Url.Action("search", "misc")">Search Page</a>
+                    </li>
+                    <li class="@Html.RouteIf("ckeditor", "active")">
+                        <a href="@Url.Action("ckeditor", "misc")">CK Editor</a>
+                    </li>
+                </ul>
+            </li>*@
+
+
+        </ul>
+    </nav>
+    <span class="minifyme" data-action="minifyMenu">
+        <i class="fa fa-arrow-circle-left hit"></i>
+    </span>
+
+</aside>
+<!-- END NAVIGATION -->

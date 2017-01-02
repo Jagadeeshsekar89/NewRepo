@@ -1,0 +1,200 @@
+/*
+ * It is advised not to edit the smartadmin_production.css
+ * as this will override any changes you make in the
+ * later versions of this theme.
+ *
+ * We advise that you use use this CSS to override
+ * SmartAdmin styles.
+ *
+ * Rename the stylesheet to whatever your liking so it will stay
+ * unique to you with each update of SmartAdmin.
+ */
+
+/*
+ * INDEX
+ *
+ * - HTML
+ * - BODY
+ * - CUSTOM STYLES
+ */
+
+
+/* LAYOUT STYLES OVERRIDE */
+
+.smart-style-4 #ribbon {
+    display: block !important;
+    top: 48px;
+    font-size: 12px;
+    background-color: #FFF;
+    left: initial;
+    padding-top: 1px;
+}
+
+.smart-style-4 .page-title {
+  margin: 3px 0 10px;
+}
+.smart-style-4 #ribbon .breadcrumb, .smart-style-4 #ribbon .breadcrumb a {
+    color: #8a8484!important;
+}
+.smart-style-4 #ribbon .breadcrumb li:last-child, .smart-style-4 #ribbon .breadcrumb>.active {
+    color: #8a8484!important;
+}
+
+body:not(.menu-on-top).desktop-detected {
+    min-height: 700px!important;
+}
+body.menu-on-top.smart-style-4 #ribbon {
+    top: 125px;
+}
+
+.fixed-navigation nav>ul {
+  width: 100%;
+  overflow-y: auto;
+}
+
+.fixed-header #main {
+    margin-top: 0;
+}
+.pace-activity {
+    display: none !important;
+}
+#ribbon {
+    border-bottom: none;
+}
+
+#content {
+    padding-top: 50px;
+}
+
+.smart-style-0 #ribbon, .smart-style-1 #ribbon, .smart-style-2 #ribbon, .smart-style-3 #ribbon, .smart-style-4 #ribbon, .smart-style-5 #ribbon, .smart-style-6 #ribbon {
+    border-bottom: none;
+    position: fixed !important;
+    width: 100%;
+    z-index: 10;
+}
+
+body.smart-style-6 #content {
+    margin-top: 0;
+}
+
+@media only screen and (max-width: 479px) and (min-width: 320px) {
+   
+   .page-title {
+     display: block; 
+    }
+}
+.menu-on-top #main {
+  margin-top: 28px!important;
+}
+#mobile-profile-img {
+    display: block !important;
+}
+
+.onoffswitch-checkbox {
+    position: absolute;
+    opacity: 0;
+}
+body.smart-style-6 #logo img {
+    display: inline-block;
+}
+
+
+/* LAYOUT STYLES OVERRIDE end*/
+
+ #logo {
+  margin-top: 2px;
+}
+
+#logo img {
+  width: 128px;
+}
+
+.smart-style-4 #content .landing-page {
+  background-color: transparent !important;
+  border-bottom: none !important;
+}
+
+.smart-style-4 #content .display-image {
+  width: 708px;
+  height: 356px;
+  margin-top: 0;
+}
+
+#extr-page #header {
+  overflow: initial;
+}
+
+#extr-page #header .header-dropdown-list {
+  margin-top: 13px;
+}
+
+#extr-page div#logo-group {
+  background: transparent;
+}
+
+#extr-page #header #logo {
+  margin-top: 15px;
+  margin-left: 0;
+}
+
+#extr-page .dummy-header {
+    display: none;
+}
+
+#privacyPolicyForm .form-horizontal .control-label {
+  padding-top: 0px;
+}
+
+.role-menu-selection .dd3-handle {
+  display: none;
+}
+
+.role-menu-selection .dd3-item>button {
+  margin-left: 0;
+}
+
+.role-menu-selection .dd3-content {
+  padding-left: 34px;
+}
+
+.role-menu-selection .dd3-content label, .role-menu-selection .dd3-content input[type=checkbox]{
+  margin: 0
+}
+
+.role-based-menu-selection {
+  max-height: 450px;
+  overflow-x: scroll;
+}
+
+.role-based-branch-selection {
+  max-height: 450px;
+  overflow-x: scroll;
+}
+
+.select2-company-result {
+  border-bottom: 1px solid #ddd;
+  cursor: pointer;
+}
+
+.select2-company-result:hover {
+  background-color: #CCC
+}
+
+#selectedMenusList, #selectedBranchList {
+  margin-top: 10px;
+}
+
+.radio-with-select2 .radio {
+    margin-bottom: 10px;
+}
+
+.select2-container--disabled .select2-selection {
+  background-color: rgba(221, 221, 221, 0.49);
+  opacity: 0.7;
+}
+
+#left-panel::-webkit-scrollbar-thumb {
+    -webkit-border-radius: 10px;
+    border-radius: 10px;
+    background: rgba(86, 83, 83, 0.36);
+}
