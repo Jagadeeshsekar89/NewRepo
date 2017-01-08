@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace SmartERP.Repository.Core
 {
-    public class MenuRepository : GenericRepository<Menu>, IMenu
+    public class MenuRepository : GenericRepository<Menu>
     {
         public MenuRepository(string table) : base(table)
         {

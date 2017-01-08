@@ -1,5 +1,25 @@
 var AppHost = location.protocol + '//' + location.hostname + (location.port ? ':' + location.port : '');
 $(document).ready(function () {
+
+    if ($("#security_IsIpRestricted").val() != null && $("#security_IsIpRestricted").val() != undefined && $("#security_IsIpRestricted").val() != '') {
+        if ($("#security_IsIpRestricted").is(":checked")) {
+            $('#security_IpAddress').removeAttr("readonly");
+        }
+        else {
+            $('#security_IpAddress').attr("readonly", "readonly");
+        }
+    }
+   
+    $(document).on('click', '#security_IsIpRestricted', function (event) {
+        if ($(this).is(":checked")) {
+            $('#security_IpAddress').removeAttr("readonly");
+        }
+        else {
+            $('#security_IpAddress').attr("readonly", "readonly");
+        }
+    });
+    
+
     $(document).on('click', '.onoffswitch-checkbox', function (event) {
         if ($(this).is(":checked")) {
             $(this).val("true");
@@ -15,7 +35,7 @@ $(document).ready(function () {
         PopulateMenusForRole();
     }
 
-    if ($("#selectedBranchIds").val() != null && $("#selectedBranchIds").val() != undefined && $("#selectedBranchIds").val() != '') {
+    if ($("#BranchCodes").val() != null && $("#BranchCodes").val() != undefined && $("#BranchCodes").val() != '') {
         PopulateBranchesForRole();
     }
 
@@ -218,14 +238,14 @@ function saveMenusForRole() {
 }
 
 function saveBranchesForRole() {
-    var selectedBranchIds = '';
+    var BranchCodes = '';
     $('#selectedBranchList').text('');
-    $("#selectedBranchIds").val('');
+    $("#BranchCodes").val('');
     $('.role-based-branch-selection input[type="checkbox"]:checked').each(function (index, menu) {
         $('#selectedBranchList').append($(menu).data('text') + ", ");
-        selectedBranchIds += menu.value + ",";
+        BranchCodes += menu.value + ",";
     });
-    $("#selectedBranchIds").val(selectedBranchIds);
+    $("#BranchCodes").val(BranchCodes);
     $('#selectBranchesModal').modal('hide')
 }
 
@@ -241,10 +261,10 @@ function PopulateMenusForRole() {
 }
 
 function PopulateBranchesForRole() {
-    var selectedBranchIds = $("#selectedBranchIds").val();
+    var BranchCodes = $("#BranchCodes").val();
     $('#selectedBranchList').text('');
     $('.role-based-branch-selection input[type="checkbox"]').each(function (index, menu) {
-        if (selectedBranchIds.indexOf(menu.value) >= 0) {
+        if (BranchCodes.indexOf(menu.value) >= 0) {
             $(this).prop('checked', true)
             $('#selectedBranchList').append($(menu).data('text') + ", ");
         }

@@ -68,9 +68,9 @@ namespace SmartERP.Web.Repository
 
                 traceLog.AuditID = Guid.NewGuid();
                 traceLog.Message = traceLog.Message;
-                traceLog.UserName = contextUser != null && string.IsNullOrEmpty(contextUser.UserCode) ? "" : contextUser.UserCode;
+                traceLog.UserName = contextUser != null && contextUser.UserId != 0 ? contextUser.UserId.ToString(): "";
                
-                traceLog.CreatedBy = contextUser != null && string.IsNullOrEmpty(contextUser.UserCode) ? "" : contextUser.UserCode;
+                traceLog.CreatedBy = contextUser != null && contextUser.UserId != 0 ? contextUser.UserId.ToString() : "";
                 traceLog.IPAddress = HttpContext.Current.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] ?? HttpContext.Current.Request.UserHostAddress;
                 traceLog.AreaAccessed = HttpContext.Current.Request.RawUrl;
                

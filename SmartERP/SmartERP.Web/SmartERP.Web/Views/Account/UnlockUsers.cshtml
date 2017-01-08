@@ -17,7 +17,7 @@
         <!-- right side of the page with the sparkline graphs -->
         <!-- col -->
         <div class="col-xs-12 col-sm-5 col-md-5 col-lg-2">
-            
+
         </div>
         <!-- end col -->
 
@@ -39,79 +39,80 @@
                 <!-- Widget ID (each widget will need unique ID)-->
                 <div class="jarviswidget jarviswidget-color-darken" id="wid-id-0" data-widget-colorbutton="false" data-widget-editbutton="false" data-widget-deletebutton="false">
                     <!-- widget options:
-                    usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
+        usage: <div class="jarviswidget" id="wid-id-0" data-widget-editbutton="false">
 
-                    data-widget-colorbutton="false"
-                    data-widget-editbutton="false"
-                    data-widget-togglebutton="false"
-                    data-widget-deletebutton="false"
-                    data-widget-fullscreenbutton="false"
-                    data-widget-custombutton="false"
-                    data-widget-collapsed="true"
-                    data-widget-sortable="false"
+        data-widget-colorbutton="false"
+        data-widget-editbutton="false"
+        data-widget-togglebutton="false"
+        data-widget-deletebutton="false"
+        data-widget-fullscreenbutton="false"
+        data-widget-custombutton="false"
+        data-widget-collapsed="true"
+        data-widget-sortable="false"
 
-                    -->
+        -->
                     <header>
                         <span class="widget-icon"> <i class="fa fa-table"></i> </span>
                         <h2>Locked User List </h2>
                     </header>
-                        <!-- widget div-->
+                              <!-- widget div-->
                         <div>
-                            <form action="@Url.Action("unlockusers", "account")" method="POST" id="login-form" class="smart-form client-form">
-                            <!-- widget content -->
-                            <div class="widget-body no-padding">
+                            <form action="@Url.Action("unlockusers", "account")" method="POST" id="login-form">
 
-                                <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
-                                    <thead>
-                                        <tr>
-                                            <th>Employee ID</th>
-                                            <th>Name</th>
-                                            <th>Email</th>
-                                            <th>Mobile</th>
-                                            <th>User Code</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @{
-                                            if (Model != null && Model.users != null && Model.users.Any())
-                                            {
-                                                for (int i= 0;i < Model.users.Count();i++)
+                                <!-- widget content -->
+                                <div class="widget-body no-padding">
+
+                                    <table id="dt_basic" class="table table-striped table-bordered table-hover" width="100%">
+                                        <thead>
+                                            <tr>
+                                                <th>Employee ID</th>
+                                                <th>Name</th>
+                                                <th>Email</th>
+                                                <th>Mobile</th>
+                                                @*<th>User Code</th>*@
+                                                <th>Action</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @{
+                                                if (Model != null && Model.users != null && Model.users.Any())
                                                 {
-                                                    <tr>
-                                                        <td>@Model.users[i].EmployeeID</td>
-                                                        <td>@Model.users[i].FirstName @Model.users[i].LastName</td>
-                                                        <td>@Model.users[i].EmailID</td>
-                                                        <td>@Model.users[i].MobileNumber</td>
-                                                        <td>@Model.users[i].UserCode</td>
-                                                        <td>@Html.CheckBoxFor(model => Model.users[i].IsLocked)</td>
-                                                        @Html.HiddenFor(model => Model.users[i].Id) 
-                                                    </tr>
+                                                    for (int i = 0; i < Model.users.Count(); i++)
+                                                    {
+                                                        <tr>
+                                                            <td>@Model.users[i].EmployeeID</td>
+                                                            <td>@Model.users[i].FirstName @Model.users[i].LastName</td>
+                                                            <td>@Model.users[i].EmailID</td>
+                                                            <td>@Model.users[i].MobileNumber</td>
+                                                            @*<td>@Model.users[i].UserCode</td>*@
+                                                            <td>@Html.CheckBoxFor(model => Model.users[i].IsLocked)</td>
+                                                            @Html.HiddenFor(model => Model.users[i].Id)
+                                                        </tr>
+                                                    }
                                                 }
                                             }
-                                        }
-                                    </tbody>
-                                </table>
+                                        </tbody>
+                                    </table>
 
-                            </div>
-                            <!-- end widget content -->
-                            <footer>
-                                <button type="submit" class="btn btn-primary">
-                                    Unlock
-                                </button>
-                            </footer>
+                                </div>
+                                <footer>
+                                    <button type="submit" class="btn btn-sm btn-primary pull-right">
+                                        Unlock
+                                    </button>
+                                </footer>
                             </form>
-                        </div>
-                        
-                        
-                        <!-- end widget div -->
+                    <!-- end widget content -->
+                    </div>
 
-</div>
+
+                    <!-- end widget div -->
+
+                </div>
                 <!-- end widget -->
 
             </article>
             <!-- WIDGET END -->
-            
+
         </div>
 
         <!-- end row -->

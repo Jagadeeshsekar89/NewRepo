@@ -64,10 +64,10 @@
   <ItemGroup>
     <Folder Include="Properties" />
     <Folder Include="dbo" />
-    <Folder Include="dbo\Functions" />
     <Folder Include="dbo\Stored Procedures" />
     <Folder Include="dbo\Tables" />
     <Folder Include="Data" />
+    <Folder Include="dbo\Stored Procedures\Functions" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="dbo\Tables\Users.sql" />
@@ -87,7 +87,6 @@
     <Build Include="dbo\Stored Procedures\SP_DML_UserMenu.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_RoleUser.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_RoleMenu.sql" />
-    <Build Include="dbo\Stored Procedures\SP_GetUsers.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_Security.sql" />
     <Build Include="dbo\Tables\Notification.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_Notification.sql" />
@@ -95,14 +94,29 @@
     <Build Include="dbo\Stored Procedures\SP_DML_TraceLog.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_ConfiguredRoleMenus.sql" />
     <Build Include="dbo\Stored Procedures\SP_GetLockedUsers.sql" />
-    <Build Include="dbo\Stored Procedures\SP_GET_UserRoleMenu.sql" />
     <None Include="MenuData.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_Company.sql" />
     <Build Include="dbo\Tables\Company.sql" />
     <Build Include="dbo\Tables\Country.sql" />
     <Build Include="dbo\Stored Procedures\SP_DML_Country.sql" />
+    <Build Include="dbo\Tables\WorkFlowForm.sql" />
+    <Build Include="dbo\Tables\WorkFlowApprovals.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_WorkFlowForm.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_WorkFlowApprovals.sql" />
+    <Build Include="dbo\Tables\BusinessCenter.sql" />
+    <Build Include="dbo\Tables\GeoDistrict.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_BusinessCenter.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_GeoDistrict.sql" />
+    <Build Include="dbo\Stored Procedures\SP_GetByMenuCode.sql" />
+    <Build Include="dbo\Tables\Branch.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_Branch.sql" />
+    <Build Include="dbo\Tables\UserAuditLog.sql" />
+    <Build Include="dbo\Stored Procedures\SP_DML_UserAuditLog.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Script.PostDeployment.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="SmartERP.Database.publish.xml" />
   </ItemGroup>
 </Project>

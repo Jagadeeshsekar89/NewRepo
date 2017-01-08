@@ -9,10 +9,9 @@ namespace SmartERP.Entity.Model.User
 {
     public class Menu :BaseEntity
     {
-        public string MenuCode { get; set; }
         public string MenuName { get; set; }
         public string MenuURL { get; set; }
-        public string ParentMenucode { get; set; }        
+        public int ParentMenucode { get; set; }        
         public string MenuType { get; set; }
 
     }

@@ -40,10 +40,11 @@
                     <form action="@Url.Action("Company", "Configuration")" method="POST" class="form-horizontal" name="configureComapnyForm" id="configureComapnyForm">
                         <fieldset>
                             <legend>@((Model.Id != 0) ? "Edit" : "Add") - @ViewBag.PageHeader </legend>
+                            @Html.HiddenFor(model => model.CompanyCode)
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Select Country</label>
+                                        <label class="col-md-4 control-label">Select Country <sup>*</sup></label>
                                         <div class="col-md-6">
                                       
                                             @Html.DropDownListFor(model => model.CountryCode, new SelectList(Model.Countries, "Value", "Text"), "- Please Select -" ,new { @required = "required", @class = "form-control" })
@@ -55,7 +56,7 @@
                                 </div>
                             </div>
 
-                            <div class="row">
+                            @*<div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Company Code</label>
@@ -64,14 +65,14 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
+                            </div>*@
                         </fieldset>
 
                         <fieldset>
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Company Name</label>
+                                        <label class="col-md-4 control-label">Company Name <sup>*</sup></label>
                                         <div class="col-md-6">
                                             @Html.TextBoxFor(m => m.CompanyName, new { @required = "required", @class = "form-control" })
                                         </div>
@@ -82,11 +83,28 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Short Name</label>
+                                        <label class="col-md-4 control-label">Short Name <sup>*</sup></label>
                                         <div class="col-md-6">
                                             @Html.TextBoxFor(m => m.ShortName, new { @required = "required", @class = "form-control" })
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div>
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Is Active</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="IsActive">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div> 
                                 </div>
                             </div>
                         </fieldset>

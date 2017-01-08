@@ -46,7 +46,7 @@
                                         <label class="col-md-4 control-label">Work Flow Name </label>
                                         <div class="col-md-6">
                                             @Html.HiddenFor(m=>m.Mode, new { @id = "mode" })
-                                            @Html.TextBoxFor(m => m.WorkFlowMaster.WorkFlow, new { @required = "required", @class = "form-control" })
+                                            @Html.TextBoxFor(m => m.WorkFlowMaster.FormCode, new { @required = "required", @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>
@@ -57,7 +57,7 @@
                                     <div class="form-group">
                                         <label class="col-md-4 control-label">Work Flow Description</label>
                                         <div class="col-md-6">
-                                            @Html.TextBoxFor(m => m.WorkFlowMaster.Description, new { @required = "required", @class = "form-control" })
+                                            @Html.TextBoxFor(m => m.WorkFlowMaster.FormName, new { @required = "required", @class = "form-control" })
                                         </div>
                                     </div>
                                 </div>
@@ -105,9 +105,10 @@
                                                     <tr>
 
                                                         <th data-hide="phone">WorkFlow Code</th>
-                                                        <th>Work flow</th>
+                                                        <th>Work flow No</th>
                                                         <th>Description</th>
-
+                                                        <th>Step Up</th>
+                                                        <th>Step Back</th>
                                                         <th>Action</th>
                                                     </tr>
                                                 </thead>
@@ -119,9 +120,11 @@
                                                         for(var j=0; Model.WorkFlowDetail.Count >j; j++)
                                                         {
                                                             <tr>
-                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Condition , new { @required = "required", @class = "form-control" })</td>
-                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Description, new { @required = "required", @class = "form-control" })</td>
-                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Stepnumber, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].Id, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].ApprovalLevelCode , new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].ExecuteRule_SP, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].True_ApprovalLevelCode, new { @required = "required", @class = "form-control" })</td>
+                                                                <td>@Html.TextBoxFor(a => Model.WorkFlowDetail[j].False_ApprovalLevelCode, new { @required = "required", @class = "form-control" })</td>
                                                                 <td>
                                                                     @Html.HiddenFor(a => Model.WorkFlowDetail[j].UniqueId)
                                                                     @if (j > 0)

@@ -60,24 +60,6 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Forgot Password</label>
-                                        <div class="col-md-6">
-                                            <span class="onoffswitch">
-                                                @*<input type="checkbox" name="security.IsForgotPassword" class="onoffswitch-checkbox" id="security_IsForgotPassword">*@
-                                                @Html.CheckBoxFor(m => m.security.IsForgotPassword, new { @class = "onoffswitch-checkbox" })
-                                                <label class="onoffswitch-label" for="security_IsForgotPassword">
-                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
-                                                    <span class="onoffswitch-switch"></span>
-                                                </label>
-                                            </span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                    <div class="form-group">
                                         <label class="col-md-4 control-label">IP Restriction</label>
                                         <div class="col-md-6">
                                             <span class="onoffswitch">
@@ -90,6 +72,25 @@
                                             </span>
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Forgot Password</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @*<input type="checkbox" name="security.IsForgotPassword" class="onoffswitch-checkbox" id="security_IsForgotPassword">*@
+                                                @Html.CheckBoxFor(m => m.security.IsForgotPassword, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="security_IsForgotPassword">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+
                                 </div>
 
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
@@ -130,14 +131,14 @@
                                                     if (Model.security != null && !string.IsNullOrEmpty(Model.security.RemoteAccess) &&
                                                     Model.security.RemoteAccess.Split(',').Any(u => u.Contains(item.Value)))
                                                     {
-                                                    <option selected="selected" value="@item.Value">@item.Text</option>
+                                                        <option selected="selected" value="@item.Value">@item.Text</option>
                                                     }
                                                     else {
-                                                    <option value="@item.Value">@item.Text</option>
+                                                        <option value="@item.Value">@item.Text</option>
                                                     }
                                                 }
                                             </select>
-                                            @Html.HiddenFor(m=>m.security.RemoteAccess)
+                                            @Html.HiddenFor(m => m.security.RemoteAccess)
                                         </div>
                                     </div>
                                 </div>
@@ -199,7 +200,7 @@
                                             <div class="input-group">
                                                 @Html.TextBoxFor(m => m.security.MinLength, new { @class = "form-control" })
                                                 @*<input class="form-control" id="append" type="text">*@
-                                                <span class="input-group-addon">Character</span>
+                                                <span class="input-group-addon">Char</span>
                                             </div>
                                         </div>
                                     </div>
@@ -211,7 +212,7 @@
                                             <div class="input-group">
                                                 @Html.TextBoxFor(m => m.security.MaxLength, new { @class = "form-control" })
                                                 @*<input class="form-control" id="append" type="text">*@
-                                                <span class="input-group-addon">Character</span>
+                                                <span class="input-group-addon">Char</span>
                                             </div>
                                         </div>
                                     </div>

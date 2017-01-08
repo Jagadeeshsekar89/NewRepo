@@ -77,9 +77,9 @@
                                     <tr>
                                       
                                         <th data-hide="phone">WorkFlow Code</th>
-                                        <th>Work flow</th>
-                                        <th>Description</th>
-                                     
+                                        <th>Form Code</th>
+                                        <th>Form/Name</th>
+                                        <th>Table Name</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -90,9 +90,9 @@
                                         {
                                         <tr>
                                             <td>@item.WorkFlowMaster.Id</td>
-                                            <td>@item.WorkFlowMaster.WorkFlow</td>
-                                            <td>@item.WorkFlowMaster.Description</td>
-                                       
+                                            <td>@item.WorkFlowMaster.FormCode</td>
+                                            <td>@item.WorkFlowMaster.FormName</td>
+                                            <td>@item.WorkFlowMaster.TableName</td>
                                             <td><a class="btn btn-default" href="@Url.Action("WorkFlowMasterDetail", "Configuration", new { @id = item.WorkFlowMaster.Id })"><i class="fa fa-cog"></i> Edit</a></td>
                                         </tr>
                                         }

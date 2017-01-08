@@ -1,4 +1,4 @@
-﻿@model RolesViewModel
+﻿@model RoleUserViewModel
 
 <!-- MAIN CONTENT -->
 <div id="content">
@@ -59,70 +59,80 @@
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                     <div class="form-group">
-                                        <label class="col-md-4 control-label">Select Users</label>
+                                        <label class="col-md-4 control-label">Select User</label>
                                         <div class="col-md-6">
-                                            <select multiple class="select2 col-md-6" id="roleUsers">
-                                                @foreach (var item in Model.UserList)
-                                                {
-                                                    if (Model != null && !string.IsNullOrEmpty(Model.UserCode) &&
-                                                    Model.UserCode.Split(',').Any(u => u.Contains(item.UserCode)))
-                                                    {
-                                                    <option selected="selected" value="@item.UserCode">@item.FirstName @item.LastName</option>
-                                                    }
-                                                    else {
-                                                    <option value="@item.UserCode">@item.FirstName @item.LastName</option>
-                                                    }
-                                                }
-                                            </select>
-                                            @Html.HiddenFor(m => m.UserCode)
+                                            @Html.DropDownListFor(m => m.UserCode, Model.UserList, "--Select--", new { @class = "form-control" })
+
+                                            @Html.HiddenFor(m => m.CreatedBy)
+                                            @Html.HiddenFor(m => m.Id)
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
-                            <fieldset>
-                                <legend></legend>
-                                <div class="row">
-                                    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                                        <div class="form-group">
-                                            <label class="col-md-4 control-label">Select Menus</label>
-                                            <div class="col-md-6">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectMenusModal">
-                                                    Click here to select
-                                                </button>
-                                                <textarea id="selectedMenusList" class="form-control" rows="4" placeholder="Selected menus will be displayed here" readonly></textarea>
-                                                @Html.HiddenFor(m => m.MenuCode)
+                            @*<fieldset>
+                                    <legend></legend>
+                                    <div class="row">
+                                        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                            <div class="form-group">
+                                                <label class="col-md-4 control-label">Select Menus</label>
+                                                <div class="col-md-6">
+                                                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectMenusModal">
+                                                        Click here to select
+                                                    </button>
+                                                    <textarea id="selectedMenusList" class="form-control" rows="4" placeholder="Selected menus will be displayed here" readonly></textarea>
+                                                    @Html.HiddenFor(m => m.MenuCode)
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                </div>
-                            </fieldset>
+                                </fieldset>*@
 
                             <fieldset>
                                 <legend></legend>
                                 <div class="row">
                                     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                                         <div class="form-group">
-                                            <label class="col-md-4 control-label">Select Branches</label>
+                                            <label class="col-md-4 control-label">Select Branche</label>
                                             <div class="col-md-6">
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#selectBranchesModal">
-                                                    Click here to select
-                                                </button>
-                                                <textarea id="selectedBranchList" class="form-control" rows="4" placeholder="Selected Branches will be displayed here" readonly></textarea>
-                                                @Html.HiddenFor(m => m.selectedBranchIds)
+                                                @Html.DropDownListFor(m => m.BranchCode, Model.BranchList, "--Select--", new { @class = "form-control" })
                                             </div>
                                         </div>
                                     </div>
                                 </div>
                             </fieldset>
                         </fieldset>
+                        <fieldset>
+                            <legend></legend>
+                            <div class="row">
+                                <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                                    <div class="form-group">
+                                        <label class="col-md-4 control-label">Is Active</label>
+                                        <div class="col-md-6">
+                                            <span class="onoffswitch">
+                                                @Html.CheckBoxFor(m => m.IsActive, new { @class = "onoffswitch-checkbox" })
+                                                <label class="onoffswitch-label" for="IsActive">
+                                                    <span class="onoffswitch-inner" data-swchon-text="ON" data-swchoff-text="OFF"></span>
+                                                    <span class="onoffswitch-switch"></span>
+                                                </label>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </fieldset>
+
                         <div class="form-actions">
                             <div class="row">
                                 <div class="col-md-12">
                                     <button class="btn btn-primary" type="submit">
                                         <i class="fa fa-save"></i>
-                                        Add
+                                        Save
                                     </button>
+                                    <a class="btn btn-primary" href="@Request.UrlReferrer">
+                                        <i class="fa fa-undo"></i>
+                                        Back
+                                    </a>
                                 </div>
                             </div>
                         </div>
@@ -153,67 +163,66 @@
 
 </div>
 <!-- END MAIN CONTENT -->
-
-<div class="modal fade" id="selectMenusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                <h4 class="modal-title" id="myModalLabel">Choose Menus for this Role</h4>
-            </div>
-            <div class="modal-body">
-                <div class="col-md-12 role-based-menu-selection nested-checkbox">
-                    <div class="dd role-menu-selection" id="nestable3">
-                        <ol class="dd-list">
-                            @if (Model.MenuList != null && Model.MenuList.Any())
-                            {
-                                var parentMenus = Model.MenuList.Where(i => string.IsNullOrEmpty(i.ParentMenucode)).ToList();
-                                foreach (var item in parentMenus)
+@*<div class="modal fade" id="selectMenusModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">Choose Menus for this Role</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 role-based-menu-selection nested-checkbox">
+                        <div class="dd role-menu-selection" id="nestable3">
+                            <ol class="dd-list">
+                                @if (Model.MenuList != null && Model.MenuList.Any())
                                 {
-                                <li class="dd-item dd3-item" data-id="16">
-                                    <div class="dd-handle dd3-handle"></div>
-                                    <div class="dd3-content">
-                                        <label>
-                                            <input type="checkbox" data-text="@item.MenuName" value="@item.MenuCode">
-                                            @item.MenuName
-                                        </label>
-                                    </div>
-                                    @{
-                                        var childItems = Model.MenuList.Any(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0) ? Model.MenuList.Where(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0).ToList() : null;
-                                        if (childItems != null && childItems.Any())
-                                        {
-                                        <ol class="dd-list">
-                                            @foreach (var childItem in childItems)
+                                    var parentMenus = Model.MenuList.Where(i => string.IsNullOrEmpty(i.ParentMenucode)).ToList();
+                                    foreach (var item in parentMenus)
+                                    {
+                                    <li class="dd-item dd3-item" data-id="16">
+                                        <div class="dd-handle dd3-handle"></div>
+                                        <div class="dd3-content">
+                                            <label>
+                                                <input type="checkbox" data-text="@item.MenuName" value="@item.MenuCode">
+                                                @item.MenuName
+                                            </label>
+                                        </div>
+                                        @{
+                                            var childItems = Model.MenuList.Any(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0) ? Model.MenuList.Where(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0).ToList() : null;
+                                            if (childItems != null && childItems.Any())
                                             {
-                                            <li class="dd-item dd3-item" data-id="16">
-                                                <div class="dd-handle dd3-handle"></div>
-                                                <div class="dd3-content">
-                                                    <label>
-                                                        <input type="checkbox" data-text="@childItem.MenuName" value="@childItem.MenuCode">
-                                                        @childItem.MenuName
-                                                    </label>
-                                                </div>
-                                            </li>
+                                            <ol class="dd-list">
+                                                @foreach (var childItem in childItems)
+                                                {
+                                                <li class="dd-item dd3-item" data-id="16">
+                                                    <div class="dd-handle dd3-handle"></div>
+                                                    <div class="dd3-content">
+                                                        <label>
+                                                            <input type="checkbox" data-text="@childItem.MenuName" value="@childItem.MenuCode">
+                                                            @childItem.MenuName
+                                                        </label>
+                                                    </div>
+                                                </li>
+                                                }
+                                            </ol>
                                             }
-                                        </ol>
                                         }
-                                    }
-                                </li>
-                                }
-                             }
-                        </ol>
+                                    </li>
+                                                }
+                                            }
+                            </ol>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="saveMenusForRole()">Done</button>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveMenusForRole()">Done</button>
+                </div>
             </div>
         </div>
-    </div>
-</div>
+    </div>*@
 
-<div class="modal fade" id="selectBranchesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+@*<div class="modal fade" id="selectBranchesModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -224,33 +233,21 @@
                 <div class="col-md-12 role-based-branch-selection nested-checkbox">
                     <div class="dd role-menu-selection" id="nestable3">
                         <ol class="dd-list">
-                            <li class="dd-item dd3-item" data-id="16">
-                                <div class="dd-handle dd3-handle"></div>
-                                <div class="dd3-content">
-                                    <label>
-                                        <input type="checkbox" value="1" data-text="Branch-1">
-                                        Branch-1
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="dd-item dd3-item" data-id="16">
-                                <div class="dd-handle dd3-handle"></div>
-                                <div class="dd3-content">
-                                    <label>
-                                        <input type="checkbox" data-text="Branch-2" value="2">
-                                        Branch-2
-                                    </label>
-                                </div>
-                            </li>
-                            <li class="dd-item dd3-item" data-id="16">
-                                <div class="dd-handle dd3-handle"></div>
-                                <div class="dd3-content">
-                                    <label>
-                                        <input type="checkbox" data-text="Branch-3" value="3">
-                                        Branch-3
-                                    </label>
-                                </div>
-                            </li>
+                            @if (Model.BranchList != null && Model.BranchList.Any())
+                            {
+                                foreach (var item in Model.BranchList)
+                                {
+                                <li class="dd-item dd3-item" data-id="16">
+                                    <div class="dd-handle dd3-handle"></div>
+                                    <div class="dd3-content">
+                                        <label>
+                                            <input type="checkbox" value="@item.BusinessCenterCode" data-text="@item.BusinessCenterName">
+                                            @item.BusinessCenterName
+                                        </label>
+                                    </div>
+                                </li>
+                                }
+                            }
                         </ol>
                     </div>
                 </div>
@@ -261,7 +258,7 @@
             </div>
         </div>
     </div>
-</div>
+</div>*@
 
 @section pagespecific {
     <!-- PAGE RELATED PLUGIN(S)

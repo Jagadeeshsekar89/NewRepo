@@ -8,129 +8,95 @@ using System.Web.Mvc;
 using System;
 using System.Linq;
 using SmartERP.Web.Utilities;
+using SmartERP.Entity.Model.BusinessLocation;
+using AutoMapper;
+using SmartERP.Entity.Model.Configuration;
 
 #endregion
 
 namespace SmartERP.Web.Controllers
 {
-    [Authorize]
+    [AuthorizeUser]
     public class MiscController : BaseController
     {
+        public MiscController()
+        {
+            Mapper.Initialize(cfg =>
+            {
+                cfg.CreateMap<RoleUser, RoleUserViewModel>();
+                cfg.CreateMap<RoleUserViewModel, RoleUser>();
+            });
+        }
+        [AllowAnonymous]
         // GET: /misc/error404
         public ActionResult Error404()
         {
             return View();
         }
 
+        [AllowAnonymous]
         // GET: /misc/error500
         public ActionResult Error500()
         {
             return View();
         }
-        
+
         // GET: /misc/role
-        public ActionResult Role(string roleCode)
+        public ActionResult Role(int? id)
         {
-            var roleView = new RolesViewModel();
-            if (!string.IsNullOrEmpty(roleCode))
+            var roleView = new RoleUserViewModel();
+            if (id != null)
             {
-                var configuredRoles = _roleRepository.GetAllConfiguredRoleMenus(roleCode);
-                if (configuredRoles != null && configuredRoles.Any())
-                {
-                    foreach (var element in configuredRoles)
-                    {
-                        roleView.RoleCode = element.RoleCode;
-                        roleView.MenuCode = element.MenuCode;
-                        roleView.UserCode = element.UserCode;
-                    }
-                }
+                roleView = (id.GetValueOrDefault(0) == 0) ? new RoleUserViewModel() : Mapper.Map<RoleUser, RoleUserViewModel>(_userManagmentService.RoleUserRepo.Get(id.GetValueOrDefault()));
             }
 
-            List<Users> userList = GetAllUsers();
+            List<Users> userList = _userManagmentService.UserRepo.GetAll();
             if (userList != null && userList.Any())
             {
-                roleView.UserList = userList.ToList();
+                roleView.UserList = userList.Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.Username
+                }).OrderBy(x => x.Value).ToList();
             }
 
-            List<Role> roleList = GetAllRole();
+            List<Role> roleList = _userManagmentService.RoleRepo.GetAll();
             if (roleList != null && roleList.Any())
             {
                 roleView.RoleList = roleList.Select(x => new SelectListItem()
                 {
-                    Value = x.RoleCode.ToString(),
+                    Value = x.Id.ToString(),
                     Text = x.RoleName
                 }).OrderBy(x => x.Value).ToList();
             }
 
-            List<Menu> menuList = GetAllMenu();
-            if (menuList != null && menuList.Any())
+            List<Branch> branchList = _configurationService.BranchRepo.GetAll();
+            if (branchList != null && branchList.Any())
             {
-                roleView.MenuList = menuList.ToList();
+                roleView.BranchList = branchList.Select(x => new SelectListItem()
+                {
+                    Value = x.Id.ToString(),
+                    Text = x.BranchName
+                }).OrderBy(x => x.Value).ToList();
             }
 
             return View(roleView);
         }
 
         // POST: /misc/AddRoleUserMenu
-        public ActionResult AddRoleUserMenu(RolesViewModel roleViewModel)
+        public ActionResult AddRoleUserMenu(RoleUserViewModel roleViewModel)
         {
-            RoleMenuRepository roleMenuRep = new RoleMenuRepository("RoleMenu");
-            RoleUserRepository roleUserRep = new RoleUserRepository("RoleUser");
-            //UserMenuRepository userMenuRep = new UserMenuRepository("UserMenu");
+            var data = Mapper.Map<RoleUserViewModel, RoleUser>(roleViewModel);
 
-            if (!string.IsNullOrEmpty(roleViewModel.RoleCode))
+            if (roleViewModel.Id > 0)
             {
-                if (!string.IsNullOrEmpty(roleViewModel.MenuCode) && roleViewModel.MenuCode.Split(',').Any())
-                {
-                    foreach (var menuId in roleViewModel.MenuCode.Split(','))
-                    {
-                        if (!string.IsNullOrEmpty(menuId))
-                        {
-                            RoleMenu rolemenu = new RoleMenu { RoleCode = roleViewModel.RoleCode, MenuCode = menuId };
-                            roleMenuRep.Insert(rolemenu);
-                        }
-                    }
-                }
-                if (!string.IsNullOrEmpty(roleViewModel.UserCode) && roleViewModel.UserCode.Split(',').Any())
-                {
-                    foreach (var userId in roleViewModel.UserCode.Split(','))
-                    {
-                        if (!string.IsNullOrEmpty(userId))
-                        {
-                            //UserMenu userMenu = new UserMenu { UserCode = userId, MenuCode = menuId, RoleCode = roleViewModel.RoleCode };
-                            //userMenuRep.Insert(userMenu);
-
-                            RoleUser roleUser = new RoleUser { RoleCode = roleViewModel.RoleCode, UserCode = userId };
-                            if (!string.IsNullOrEmpty(roleViewModel.selectedBranchIds))
-                            {
-                                roleUser.BranchCodes = roleViewModel.selectedBranchIds;
-                            }
-                            roleUserRep.Insert(roleUser);
-                        }
-                    }
-                }
+                data.UpdatedBy = User.UserId.ToString();
+                _userManagmentService.RoleUserRepo.Update(data);
             }
-
-            List<Role> roleList = GetAllRole();
-            if (roleList != null && roleList.Any())
+            else
             {
-                roleViewModel.RoleList = roleList.Select(x => new SelectListItem()
-                {
-                    Value = x.RoleCode.ToString(),
-                    Text = x.RoleName
-                }).OrderBy(x => x.Value).ToList();
-            }
-
-            List<Menu> menuList = GetAllMenu();
-            if (menuList != null && menuList.Any())
-            {
-                roleViewModel.MenuList = menuList.ToList();
-            }
-
-            List<Users> userList = GetAllUsers();
-            if (userList != null && userList.Any())
-            {
-                roleViewModel.UserList = userList.ToList();
+                data.CreatedBy = User.UserId.ToString();
+                _userManagmentService.RoleUserRepo.Insert(data);
             }
 
             return RedirectToAction("Roles", "Misc");
@@ -139,22 +105,11 @@ namespace SmartERP.Web.Controllers
         // GET: /misc/roles
         public ActionResult Roles()
         {
-            List<RoleMenuViewModel> roleMenuList = new List<RoleMenuViewModel>();
-            List<Role> roleList = GetAllRole();
-            if (roleList != null && roleList.Any())
-            {
-                foreach (var role in roleList)
-                {
-                    var configuredRoles = _roleRepository.GetAllConfiguredRoleMenus(role.RoleCode);
-                    if (configuredRoles != null && configuredRoles.Any())
-                    {
-                        foreach (var element in configuredRoles)
-                        {
-                            roleMenuList.Add(new RoleMenuViewModel() { RoleCode = element.RoleCode, MenuCode = element.MenuCode, RoleName = element.RoleName, UserCode = element.UserCode });
-                        }
-                    }
-                }
-            }
+            List<RoleUserViewModel> roleMenuList = new List<RoleUserViewModel>();
+
+            var configuredRoles = _userManagmentService.RoleUserRepo.GetAll();
+            roleMenuList = Mapper.Map<List<RoleUser>, List<RoleUserViewModel>>(configuredRoles);
+
             return View(roleMenuList);
         }
 
@@ -163,7 +118,7 @@ namespace SmartERP.Web.Controllers
         {
             var PrivacyPolicy = new PrivacyPolicyViewModel();
 
-            List<Users> userList = GetAllUsers();
+            List<Users> userList = _userManagmentService.UserRepo.GetAll();
             if (userList != null && userList.Any())
             {
                 PrivacyPolicy.UserList = userList.Select(x => new SelectListItem()
@@ -186,7 +141,7 @@ namespace SmartERP.Web.Controllers
         {
             SecurityRepository rep = new SecurityRepository("Security");
 
-            List<Users> userList = GetAllUsers();
+            List<Users> userList = _userManagmentService.UserRepo.GetAll();
             if (userList != null && userList.Any())
             {
                 model.UserList = userList.Select(x => new SelectListItem()
@@ -217,13 +172,13 @@ namespace SmartERP.Web.Controllers
         {
             List<Notification> notifications = new List<Notification>();
             var userEmail = ((CustomPrincipal)HttpContext.User).EmailId;
-            var user = _userRepository.GetByEmail(userEmail.Trim());
+            var user = _userManagmentService.UserRepo.GetByEmail(userEmail.Trim());
             if (user != null)
             {
                 notifications = _notificationRepository.GetAll();
                 if (notifications != null && notifications.Any())
                 {
-                    notifications = notifications.Where(i => i.UserCode == user.UserCode
+                    notifications = notifications.Where(i => Convert.ToUInt32(i.UserCode) == user.Id
                     && string.Compare(i.ActionStatus, "Pending", StringComparison.OrdinalIgnoreCase) == 0
                     && string.Compare(i.NotificationType, type, StringComparison.OrdinalIgnoreCase) == 0).ToList();
                 }

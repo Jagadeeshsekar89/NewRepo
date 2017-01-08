@@ -15,7 +15,7 @@ BEGIN
 	SET NOCOUNT ON;
 
     -- Insert statements for procedure here
-	SELECT * from [Users] where EmailID = @id
+	SELECT * from [Users] where EmailID = @id and IsActive = 1
 END
 
 GO

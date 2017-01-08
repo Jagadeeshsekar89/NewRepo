@@ -1,10 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[SP_DML_Users]
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
-@UserCode varchar(max)  =null,
 @FirstName varchar(max) =null ,
 @LastName varchar(max) =null,
-@SSO varchar(max) =null,
+@SSO bit = 0,
 @Username varchar(max) =null ,
 @Password varchar(max) =null ,
 @EmployeeID varchar(max)=null ,
@@ -28,10 +27,10 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 
 	IF @Action = 'INSERT' 
 	BEGIN
-	
+
 	INSERT INTO [dbo].[Users]
-           ([UserCode]
-           ,[FirstName]
+           (
+           [FirstName]
            ,[LastName]
            ,[SSO]
            ,[Username]
@@ -49,7 +48,7 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 		   ,[IsLocked]
 		   ,[PasswordExpiryDate])
      VALUES (
-			@UserCode ,
+			
 			@FirstName  ,
 			@LastName ,
 			@SSO ,
@@ -69,13 +68,13 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 			@PasswordExpiryDate);
 
 		SET @Id= @@IDENTITY ;
+		EXECUTE SP_DML_UserAuditLog 'INSERT',0,'User Created',@CreatedBy,@id,null,null,null,null,@CreatedBy,@UpdatedBy,1
 		SELECT @id ;
 	END 
 	ELSE IF  @Action = 'UPDATE' 
 	BEGIN 
 	  UPDATE [Users] SET
-            [UserCode] =@UserCode
-           ,[FirstName]=@FirstName
+           [FirstName]=@FirstName
            ,[LastName]=@LastName
            ,[SSO]=@SSO
            ,[Username]=@Username
@@ -93,6 +92,11 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 		   ,[IsLocked]=@IsLocked
 		   ,[PasswordExpiryDate]=@PasswordExpiryDate
             WHERE Id = @Id ;
+			
+			IF @IsActive = 0
+			BEGIN
+			EXECUTE SP_DML_UserAuditLog 'INSERT',0,'User Deactivated',@UpdatedBy,@id,null,null,null,null,@UpdatedBy,@UpdatedBy,1
+			END
 
 			SELECT @id ;
 	END 
@@ -105,28 +109,12 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 	ELSE IF @Action = 'SELECT' 
 	BEGIN
 	SELECT * FROM [Users] 
-             WHERE Id = @Id ;
+             WHERE Id = @Id and IsActive = @IsActive;
 			
 	END
 	ELSE IF @Action = 'SELECTALL' 
 	BEGIN
-	SELECT  [id]
-			,[UserCode]
-           ,[FirstName]
-           ,[LastName]
-           ,[SSO]
-           ,[Username]
-           ,[Password]
-           ,[EmployeeID]
-           ,[EmailID]
-           ,[CreatedTimeStamp]
-           ,[UpdatedTimeStamp]
-           ,[CreatedBy]
-           ,[UpdatedBy]
-           ,[IsActive] 
-		   ,[IsDefaultPassword]
-           ,[IsLocked]
-		   ,[PasswordExpiryDate] FROM [Users] ;
+	SELECT * FROM [Users] WHERE IsActive = @IsActive;
 			
 	END
 	ELSE IF @Action = 'DROPDOWN' 

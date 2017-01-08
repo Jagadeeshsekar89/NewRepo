@@ -39,7 +39,7 @@ namespace SmartERP.Web
                         CustomPrincipalSerializeModel serializeModel = JsonConvert.DeserializeObject<CustomPrincipalSerializeModel>(authTicket.UserData);
                         CustomPrincipal newUser = new CustomPrincipal(authTicket.Name);
                         newUser.UserId = serializeModel.UserId;
-                        newUser.UserCode = serializeModel.UserCode;
+                        newUser.ImageUrl = serializeModel.ImageUrl;
                         newUser.FirstName = serializeModel.FirstName;
                         newUser.LastName = serializeModel.LastName;                      
                         newUser.EmailId = serializeModel.EmailId;

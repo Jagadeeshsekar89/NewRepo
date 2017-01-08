@@ -12,6 +12,8 @@ namespace SmartERP.Entity.Model.Configuration
         public string Unitcode { get; set; }
         public string CompanyCode { get; set; }
         public string UnitName { get; set; }
+        public string ShortName { get; set; }
+        public string LedgerCode { get; set; }
         public string Address { get; set; }
 
         public int LSTNumber { get; set; }

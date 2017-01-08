@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using System.Security.Principal;
 
 namespace SmartERP.Web.Utilities
@@ -9,7 +10,7 @@ namespace SmartERP.Web.Utilities
 
         public bool IsInRole(string role)
         {
-            if (roles.Any(r => role.Contains(r)))
+            if (roles.Any(r => Convert.ToInt32(role) == r))
             {
                 return true;
             }
@@ -23,11 +24,11 @@ namespace SmartERP.Web.Utilities
         {
             Identity = new GenericIdentity(Username);
         }
-        public long UserId { get; set; }
-        public string UserCode { get; set; }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailId { get; set; }
-        public string[] roles { get; set; }
+        public string ImageUrl { get; set; }
+        public int[] roles { get; set; }
     }
 }

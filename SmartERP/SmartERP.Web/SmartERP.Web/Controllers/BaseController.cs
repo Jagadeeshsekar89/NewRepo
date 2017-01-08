@@ -7,21 +7,23 @@ using SmartERP.Repository.Core;
 using SmartERP.Entity.Model.User;
 using System.Collections.Generic;
 using SmartERP.Repository.Common;
+using SmartERP.Entity.Model.BusinessLocation;
+using SmartERP.Entity.Model.Configuration;
 
 namespace SmartERP.Web.Controllers
 {
    
     public class BaseController : Controller
     {
-        public UsersRepository _userRepository = new UsersRepository();
-        public MenuRepository _menuRepository = new MenuRepository();
-        public RoleRepository _roleRepository = new RoleRepository();
-        public RoleMenuRepository _roleMenuRepository = new RoleMenuRepository();
+        public UserManagmentService _userManagmentService = new UserManagmentService();
+
         public SecurityRepository _securityRepository = new SecurityRepository();
         public NotificationRepository _notificationRepository = new NotificationRepository();
         public TraceLogRepository _traceLogRepository = new TraceLogRepository();
 
         public ConfigurationService _configurationService = new ConfigurationService();
+        public BusinessLocationService _businessLocationService = new BusinessLocationService();
+        public GeoService _geoService = new GeoService();
 
         protected virtual new CustomPrincipal User
         {
@@ -67,37 +69,6 @@ namespace SmartERP.Web.Controllers
             Response.Cookies.Add(cookie);
             string url = Request.UrlReferrer.AbsolutePath;
             return Redirect(url);
-        }
-
-        protected List<Menu> GetAllMenu()
-        {
-            List<Menu> data = new List<Menu>();
-            data = _menuRepository.GetAll();
-            return data;
-
-        }
-
-        protected List<Users> GetAllUsers()
-        {
-            List<Users> allUsers = new List<Users>();
-            allUsers = _userRepository.GetAll();
-            return allUsers;
-
-        }
-
-        protected List<Role> GetAllRole()
-        {
-            List<Role> data = new List<Role>();
-            data = _roleRepository.GetAll();
-            return data;
-
-        }
-
-        protected Users GetUserById(int id)
-        {
-            Users user = new Users();
-            user = _userRepository.Get(id);
-            return user;
         }
     }
 }

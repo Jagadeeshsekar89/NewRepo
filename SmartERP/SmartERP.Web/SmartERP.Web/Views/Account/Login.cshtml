@@ -17,6 +17,12 @@
                         @Resource.Submit
                     </header>
                     @Html.HiddenFor(m => m.ReturnUrl)
+                    @Html.HiddenFor(m => m.IsCaptchaEnabled)
+                    @Html.HiddenFor(m => m.ForgotPassword)
+                    @Html.HiddenFor(m => m.LoginAttempt)
+                    @Html.HiddenFor(m => m.RememberMe)
+                    @Html.HiddenFor(m => m.VirtualKeyboard)
+                    @Html.HiddenFor(m => m.IsFirstPasswordChangeRequired)
                     @Html.AntiForgeryToken()
                     @Html.ValidationBootstrap()
                     <fieldset>

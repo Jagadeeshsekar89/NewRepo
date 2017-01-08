@@ -1,18 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[SP_DML_RoleUser]
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
-@RoleCode varchar(max)  =null,
-@UserCode varchar(max) =null ,
-@CompanyFilter varchar(max)  =null,
-@CompanyCodes varchar(max) =null ,
-@SBUFilter varchar(max) =null ,
-@SBUCodes varchar(max) =null ,
-@DivisonFilter varchar(max) =null ,
-@DivisionCodes varchar(max) =null ,
-@ZoneFilter varchar(max) =null ,
-@ZoneCodes varchar(max) =null ,
-@BranchFilter varchar(max) =null ,
-@BranchCodes varchar(max) =null ,
+@RoleCode int  =0,
+@UserCode int  =0,
+@BranchCode int  =0,
 @CreatedTimeStamp datetime = null,
 @UpdatedTimeStamp datetime = null,
 @CreatedBy varchar(max)=null ,
@@ -31,16 +22,7 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 	INSERT INTO [dbo].[RoleUser]
            ([RoleCode]
            ,[UserCode]
-           ,[CompanyFilter]
-           ,[CompanyCodes]
-           ,[SBUFilter]
-           ,[SBUCodes]
-           ,[DivisonFilter]
-           ,[DivisionCodes]
-           ,[ZoneFilter]
-           ,[ZoneCodes]
-           ,[BranchFilter]
-           ,[BranchCodes]
+           ,[BranchCode]
            ,[CreatedTimeStamp]
            ,[UpdatedTimeStamp]
            ,[CreatedBy]
@@ -49,16 +31,7 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
      VALUES(
 			@RoleCode,
 			@UserCode  ,
-			@CompanyFilter ,
-			@CompanyCodes   ,
-			@SBUFilter   ,
-			@SBUCodes   ,
-			@DivisonFilter   ,
-			@DivisionCodes   ,
-			@ZoneFilter   ,
-			@ZoneCodes   ,
-			@BranchFilter   ,
-			@BranchCodes   ,
+			@BranchCode   ,
 			GETUTCDATE(),
 			GETUTCDATE() ,
 			@CreatedBy ,
@@ -66,27 +39,37 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 			@IsActive);
 
 		SET @Id= @@IDENTITY ;
+		
+		EXECUTE SP_DML_UserAuditLog 'INSERT',0,'Role Activated to User', @CreatedBy, @UserCode,@RoleCode,@BranchCode,null,null,@CreatedBy,@UpdatedBy,1
+
 		SELECT @id ;
+
 	END 
 	ELSE IF  @Action = 'UPDATE' 
 	BEGIN 
+	 
+	 DECLARE @oldbranch int
+	 SELECT @oldbranch = BranchCode from [dbo].[RoleUser] WHERE id = @id
+
+	 IF @oldbranch <> @BranchCode
+	 BEGIN
+	 EXECUTE SP_DML_UserAuditLog 'INSERT',0,'Branch Removed to User', @UpdatedBy, @UserCode,@RoleCode,@oldbranch,null,null,@UpdatedBy,@UpdatedBy,1
+	 EXECUTE SP_DML_UserAuditLog 'INSERT',0,'Branch Assigned to User',@UpdatedBy, @UserCode,@RoleCode,@BranchCode,null,null,@UpdatedBy,@UpdatedBy,1
+	 END
+
 	 UPDATE [dbo].[RoleUser]
    SET [RoleCode] = @RoleCode
       ,[UserCode] = @UserCode
-      ,[CompanyFilter] = @CompanyFilter
-      ,[CompanyCodes] = @CompanyCodes
-      ,[SBUFilter] = @SBUFilter
-      ,[SBUCodes] = @SBUCodes
-      ,[DivisonFilter] = @DivisonFilter
-      ,[DivisionCodes] = @DivisionCodes
-      ,[ZoneFilter] = @ZoneFilter
-      ,[ZoneCodes] = @ZoneCodes
-      ,[BranchFilter] = @BranchFilter
-      ,[BranchCodes] = @BranchCodes    
+      ,[BranchCode] = @BranchCode   
       ,[UpdatedTimeStamp] =    GETUTCDATE()
       ,[UpdatedBy] = @UpdatedBy
       ,[IsActive] = @IsActive
             WHERE Id = @Id ;
+
+			IF @IsActive = 0
+			BEGIN
+			EXECUTE SP_DML_UserAuditLog 'INSERT',0,'Role Deactivated to User',@UpdatedBy, @UserCode,@RoleCode,@BranchCode,null,null,@UpdatedBy,@UpdatedBy,1
+			END
 
 			SELECT @id ;
 	END 
@@ -99,12 +82,12 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 	ELSE IF @Action = 'SELECT' 
 	BEGIN
 	SELECT * FROM [RoleUser]
-             WHERE Id = @Id ;
+             WHERE Id = @Id and IsActive = @IsActive;
 			
 	END
 	ELSE IF @Action = 'SELECTALL' 
 	BEGIN
-	SELECT * FROM [RoleUser]
+	SELECT * FROM [RoleUser] WHERE IsActive = @IsActive
              
 			
 	END

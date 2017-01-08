@@ -46,44 +46,20 @@ namespace SmartERP.Web.Models
         }
 
         public string ReturnUrl { get; set; }
-        public WorkFlowMasterViewModel  WorkFlowMaster { get; set; }
-        public List<WorkFlowDetailViewModel> WorkFlowDetail { get; set; }
+        public WorkFlowForm  WorkFlowMaster { get; set; }
+        public List<WorkFlowApprovalsViewModel> WorkFlowDetail { get; set; }
         public string Mode { get; set; }
     }
 
-    public class WorkFlowMasterViewModel
+
+    public class WorkFlowApprovalsViewModel : WorkFlowApprovals
     {
-        public WorkFlowMasterViewModel()
+        public WorkFlowApprovalsViewModel()
         {
 
         }
-
-        public string ReturnUrl { get; set; }
-        public int Id { get; set; } //primarykey
-        public string WorkFlow { get; set; } //should be from table 
-        public string Description { get; set; } //should be from table
-    }
-
-    public class WorkFlowDetailViewModel
-    {
-        public WorkFlowDetailViewModel()
-        {
-
-        }
-
-        public string ReturnUrl { get; set; }
-
+  
         public string UniqueId { get; set; } //unique id for a line
-        public int Id { get; set; } //primarykey
-        public int WorkFlowId { get; set; } //Referece key
-        public string Stepnumber { get; set; } //should be from table 
-        public string Description { get; set; } //should be from table
-   
-        public string Condition { get; set; } //should be from table
-
-        public string TrueStep { get; set; } //should be from table 
-        public string FalseStep { get; set; } //should be from table 
-
-
+     
     }
 }

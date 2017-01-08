@@ -1,10 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[SP_DML_Menu]
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
-@MenuCode varchar(max)  =null,
 @MenuName varchar(max) =null ,
 @MenuUrl varchar(max) =null,
-@ParentMenuCode varchar(max) =null,
+@ParentMenuCode int =0,
 @MenuType varchar(max) =null ,
 @CreatedTimeStamp datetime = null,
 @UpdatedTimeStamp datetime = null,
@@ -22,8 +21,7 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 	BEGIN
 	
 	INSERT INTO [dbo].[Menu]
-           ([MenuCode]
-           ,[MenuName]
+           ([MenuName]
            ,[MenuURL]
            ,[ParentMenucode]
            ,[MenuType]
@@ -33,7 +31,6 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
            ,[UpdatedBy]
            ,[IsActive])
      VALUES(
-			@MenuCode ,
 			@MenuName  ,
 			@MenuUrl ,
 			@ParentMenuCode ,
@@ -50,8 +47,7 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 	ELSE IF  @Action = 'UPDATE' 
 	BEGIN 
 	  UPDATE [Menu] SET
-       [MenuCode] = @MenuCode
-      ,[MenuName] = @MenuName
+      [MenuName] = @MenuName
       ,[MenuURL] = @MenuUrl
       ,[ParentMenucode] = @ParentMenuCode
       ,[MenuType] = @MenuType

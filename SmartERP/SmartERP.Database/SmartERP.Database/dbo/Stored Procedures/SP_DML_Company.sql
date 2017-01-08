@@ -19,7 +19,11 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 
 	IF @Action = 'INSERT' 
 	BEGIN
-	
+	declare @MaxVal int
+	select @MaxVal  = Max(Id) from [dbo].[Company]
+
+	SET @CompanyCode = 'CMP' + CAST(@MaxVal AS VARCHAR)
+	 
 	INSERT INTO [dbo].[Company]
            ([CompanyCode] 
 			,[CompanyName]
@@ -102,9 +106,9 @@ SET @UpdatedTimeStamp  = GETUTCDATE();
 	ELSE IF @Action = 'DROPDOWN' 
 	BEGIN
 	SELECT  [CompanyCode] as Id
-           ,[ShortName] + [CompanyName] AS DisplayValue
+           ,[ShortName] +' '+ [CompanyName] AS DisplayValue
             FROM [Company] 
-			WHERE ISNULL(IsActive,0) =1 ;
+			WHERE ISNULL(IsActive,0) = 1 ;
 			
 	END
 END

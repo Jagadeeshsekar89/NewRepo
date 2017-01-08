@@ -9,8 +9,6 @@ namespace SmartERP.Entity.Model.User
 {
     public class RoleGroup: BaseEntity
     {
-        public string RoleGroupCode { get; set; }
-        public string RoleGroupValue { get; set; }
-
+        public string RoleGroupName { get; set; }
     }
 }

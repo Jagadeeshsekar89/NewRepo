@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using SmartERP.Entity.Model.BusinessLocation;
 
 namespace SmartERP.Web.Models
 {
@@ -37,46 +38,32 @@ namespace SmartERP.Web.Models
         public Users user { get; set; }
     }
 
-    public class RolesViewModel
+    public class RoleUserViewModel: RoleUser
     {
-        public RolesViewModel()
+        public RoleUserViewModel()
         {
         }
 
-        public IEnumerable<Users> UserList { get; set; }
+        public IEnumerable<SelectListItem> UserList { get; set; }
         public IEnumerable<SelectListItem> RoleList { get; set; }
-        public IEnumerable<Menu> MenuList { get; set; }
-
-        public string RoleCode { get; set; }
-        public string UserCode { get; set; }
-        public string MenuCode { get; set; }
-
-        public string selectedBranchIds { get; set; }
-    }
-
-    public class RoleMenuViewModel
-    {
-        public string RoleCode { get; set; }
-        public string RoleName { get; set; }
-        public string MenuCode { get; set; }
-        public string UserCode { get; set; }
+        public IEnumerable<SelectListItem> BranchList { get; set; }
     }
 
     public class CustomPrincipalSerializeModel
     {
-        public long UserId { get; set; }
-        public string UserCode { get; set; }
+        public int UserId { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string EmailId { get; set; }
-        public string[] roles { get; set; }
+        public string ImageUrl { get; set; }
+        public int[] roles { get; set; }
     }
 
     public class DynamicMenuViewModel
     {
-        public string MenuCode { get; set; }
+        public int Id { get; set; }
         public string MenuName { get; set; }
         public string MenuURL { get; set; }
-        public string ParentMenucode { get; set; }
+        public int ParentMenucode { get; set; }
     }
 }

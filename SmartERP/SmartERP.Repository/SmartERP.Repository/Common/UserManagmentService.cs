@@ -14,8 +14,9 @@ namespace SmartERP.Repository.Common
         public UsersRepository UserRepo { get; set; }
         public RoleMenuRepository RoleMenuRepo { get; set; }
         public RoleUserRepository RoleUserRepo { get; set; }
-        public UserMenuRepository UserMenuRepo { get; set; }
         public RoleRepository RoleRepo { get; set; }
+        public MenuRepository MenuRepo { get; set; }
+
         public UserManagmentService()
         {
             CreateOrExtends();
@@ -26,7 +27,7 @@ namespace SmartERP.Repository.Common
             this.UserRepo = this.UserRepo ?? new UsersRepository();
             this.RoleMenuRepo = this.RoleMenuRepo ?? new RoleMenuRepository();
             this.RoleUserRepo = this.RoleUserRepo ?? new RoleUserRepository();
-            this.UserMenuRepo = this.UserMenuRepo ?? new UserMenuRepository();
+            this.MenuRepo = this.MenuRepo ?? new MenuRepository();
             this.RoleRepo = this.RoleRepo ?? new RoleRepository();
             //do something 
 

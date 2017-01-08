@@ -15,7 +15,7 @@ using System.Data.Entity.Validation;
 
 namespace SmartERP.Web.Controllers
 {
-    [Authorize]
+    [AuthorizeUser]
     public class ConfigurationController : BaseController
     {
         // GET: /Configurtaion/country
@@ -84,7 +84,7 @@ namespace SmartERP.Web.Controllers
                 if (viewModel.Id == 0) //INSERT
                 {
                      var result = _configurationService.CompanyRepo.Insert(company);
-                    // If the user could not be created /updated
+                    // If the entry could not be created /updated
                     if (result <= 0)
                     {
                         return View(viewModel);
@@ -93,7 +93,7 @@ namespace SmartERP.Web.Controllers
                 else
                 {
                     var result = _configurationService.CompanyRepo.Update(company);
-                    // If the user could not be created /updated
+                    // If the entry could not be created /updated
                     if (!result)
                     {
                         return View(viewModel);
@@ -124,8 +124,8 @@ namespace SmartERP.Web.Controllers
             ViewBag.PageHeader = "WorkFlow";
             List<WorkFlowViewModel> Model = new List<WorkFlowViewModel>();
             Model.Add(new WorkFlowViewModel() {
-               WorkFlowMaster = new WorkFlowMasterViewModel() { },
-               WorkFlowDetail =  new List<WorkFlowDetailViewModel>() 
+               WorkFlowMaster = new WorkFlowForm() { },
+               WorkFlowDetail =  new List<WorkFlowApprovalsViewModel>() 
             });
 
             return View(Model);
@@ -137,9 +137,9 @@ namespace SmartERP.Web.Controllers
 
             WorkFlowViewModel submitModel = new WorkFlowViewModel();
             submitModel.Mode = "ADD";
-            submitModel.WorkFlowMaster = new WorkFlowMasterViewModel();
-            submitModel.WorkFlowDetail = new List<WorkFlowDetailViewModel>();
-            submitModel.WorkFlowDetail.Add(new WorkFlowDetailViewModel() { Id=0 , UniqueId = (Guid.NewGuid()).ToString() });
+            submitModel.WorkFlowMaster = new WorkFlowForm();
+            submitModel.WorkFlowDetail = new List<WorkFlowApprovalsViewModel>();
+            submitModel.WorkFlowDetail.Add(new WorkFlowApprovalsViewModel() { Id=0 , UniqueId = (Guid.NewGuid()).ToString() });
             return View(submitModel);
         }
 
@@ -152,7 +152,7 @@ namespace SmartERP.Web.Controllers
             if (viewModel.Mode == "ADDLINE")
             {
                 
-                viewModel.WorkFlowDetail.Add(new WorkFlowDetailViewModel() { Id=0, UniqueId = (Guid.NewGuid()).ToString() });
+                viewModel.WorkFlowDetail.Add(new WorkFlowApprovalsViewModel() { Id=0, UniqueId = (Guid.NewGuid()).ToString() });
                 return View(viewModel);
             }
             else if (viewModel.Mode.Length > 10 )

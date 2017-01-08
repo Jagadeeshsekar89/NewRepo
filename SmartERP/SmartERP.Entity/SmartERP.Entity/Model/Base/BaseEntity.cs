@@ -8,7 +8,7 @@ namespace SmartERP.Entity.Model.Base
 {
     public class BaseEntity
     {
-        public long Id { get; set; }
+        public int Id { get; set; }
         public DateTime? CreatedTimeStamp { get; set; }
         public DateTime? UpdatedTimeStamp { get; set; }
         public String CreatedBy { get; set; }

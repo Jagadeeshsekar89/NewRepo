@@ -76,10 +76,11 @@
                                 <thead>
                                     <tr>
                                       
-                                        <th data-hide="phone">Company Code</th>
-                                        <th>Company Name</th>
-                                        <th>Short /name</th>
+                                        @*<th data-hide="phone">Company Code</th>*@
+                                        <th data-hide="phone">Company Name</th>
+                                        <th>Short Name</th>
                                         <th>Country</th>
+                                        <th>Is Active</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -89,10 +90,11 @@
                                         foreach (var item in Model)
                                         {
                                         <tr>
-                                            <td>@item.CompanyCode</td>
+                                            @*<td>@item.CompanyCode</td>*@
                                             <td>@item.CompanyName</td>
                                             <td>@item.ShortName</td>
-                                            <td>@item.CountryName</td>
+                                            <td>@item.CountryCode</td>
+                                            <td>@item.IsActive</td>
                                             <td><a class="btn btn-default" href="@Url.Action("Company", "Configuration", new { @id = item.Id })"><i class="fa fa-cog"></i> Edit</a></td>
                                         </tr>
                                         }

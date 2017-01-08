@@ -1,5 +1,5 @@
-﻿@model List<RoleMenuViewModel>
-
+﻿@model List<RoleUserViewModel>
+                            
 <!-- MAIN CONTENT -->
 <div id="content">
 
@@ -74,9 +74,9 @@
                                 <thead>
                                     <tr>
                                         <th data-hide="phone">Role Code</th>
-                                        <th>Role Name</th>
-                                        <th>Users</th>
-                                        <th>Menus</th>
+                                        <th>User Code</th>
+                                        <th>BranchCodes</th>
+                                        <th>Is Active</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -87,10 +87,10 @@
                                         {
                                         <tr>
                                             <td>@item.RoleCode</td>
-                                            <td>@item.RoleName</td>
                                             <td>@item.UserCode</td>
-                                            <td>@item.MenuCode</td>
-                                            <td><a class="btn btn-default" href="@Url.Action("role", "misc", new { @roleCode = item.RoleCode })"><i class="fa fa-cog"></i> Edit</a></td>
+                                            <td>@item.BranchCode</td>
+                                            <td>@item.IsActive</td>
+                                            <td><a class="btn btn-default" href="@Url.Action("role", "misc", new { @id = item.Id })"><i class="fa fa-cog"></i> Edit</a></td>
                                         </tr>
                                         }
                                     }

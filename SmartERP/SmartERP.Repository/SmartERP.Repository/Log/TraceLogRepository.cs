@@ -21,11 +21,11 @@ namespace SmartERP.Repository.Core
         {
         }
 
-        public List<TraceLog> GetByUserCode(string userCode)
+        public List<TraceLog> GetByUserCode(int userCode)
         {
             List<TraceLog> log = new List<TraceLog>();
             List<TraceLog> traceLog = GetAll();
-            traceLog = traceLog.Where(i => i.UserName == userCode).ToList();
+            traceLog = traceLog.Where(i => Convert.ToUInt32(i.UserName) == userCode).ToList();
             if (traceLog != null && traceLog.Any())
             {
                 log = traceLog.Where(i => string.Compare(i.ActionName, "login", StringComparison.OrdinalIgnoreCase) == 0).OrderByDescending(i => i.CreatedTimeStamp).ToList();

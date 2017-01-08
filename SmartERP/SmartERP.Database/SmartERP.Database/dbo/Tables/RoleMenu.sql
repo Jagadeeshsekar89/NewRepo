@@ -1,7 +1,7 @@
 ﻿CREATE TABLE [dbo].[RoleMenu](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RoleCode] [varchar](max) NULL,
-[MenuCode] [varchar](max) NULL,
+	[RoleCode] [int] NULL,
+[MenuCode] [int] NULL,
 [CreatedTimeStamp][datetime] NOT NULL,
 [UpdatedTimeStamp][datetime] NOT NULL,
 [CreatedBy] [varchar](max) NULL,

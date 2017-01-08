@@ -30,6 +30,7 @@ namespace SmartERP.Web.Models
         public bool ForgotPassword { get; set; }
         public bool VirtualKeyboard { get; set; }
         public int LoginAttempt { get; set; }
+        public bool IsFirstPasswordChangeRequired { get; set; }
         public bool IsCaptchaEnabled { get; set; }
     }
 
@@ -55,19 +56,22 @@ namespace SmartERP.Web.Models
 
     public class AccountChangePasswordModel
     {
-        public int UserId { get; set; }
+        public int Id { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "Current Password")]
         public string CurrentPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
+        [Display(Name = "New Password")]
         public string NewPassword { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
         [System.ComponentModel.DataAnnotations.Compare("NewPassword")]
+        [Display(Name = "ReEnter New Password")]
         public string NewPasswordConfirm { get; set; }
     }
 

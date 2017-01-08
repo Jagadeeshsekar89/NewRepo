@@ -2,7 +2,7 @@
 (
 	[Id] INT IDENTITY(1,1) NOT NULL PRIMARY KEY, 
     [AuditID] UNIQUEIDENTIFIER NULL, 
-    [UserName] VARCHAR(MAX) NULL, 
+    [UserName] INT NULL, 
     [IPAddress] VARCHAR(MAX) NULL, 
     [AreaAccessed] VARCHAR(MAX) NULL, 
     [Message] VARCHAR(MAX) NULL, 

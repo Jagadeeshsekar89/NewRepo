@@ -1,11 +1,9 @@
 ﻿CREATE PROCEDURE [dbo].[SP_DML_Role]
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
-@RoleCode varchar(max)  =null,
 @RoleName varchar(max) =null ,
-@RoleMenu varchar(max) =null,
 @BaseControl varchar(max) =null,
-@RoleGroup varchar(max) =null ,
+@RoleGroupCode int =0 ,
 @CreatedTimeStamp datetime = null,
 @UpdatedTimeStamp datetime = null,
 @CreatedBy varchar(max)=null ,
@@ -21,22 +19,18 @@ SET @UpdatedTimeStamp  = GETUTCDATE()
 	BEGIN
 	
 INSERT INTO [dbo].[Role]
-           ([RoleCode]
-           ,[RoleName]
-           ,[RoleMenu]
+           ([RoleName]
            ,[BaseControl]
-           ,[RoleGroup]
+           ,[RoleGroupCode]
            ,[CreatedTimeStamp]
            ,[UpdatedTimeStamp]
            ,[CreatedBy]
            ,[UpdatedBy]
            ,[IsActive])
      VALUES(
-			@RoleCode ,
 			@RoleName  ,
-			@RoleMenu ,
 			@BaseControl ,
-			@RoleGroup ,
+			@RoleGroupCode ,
 			GETUTCDATE(),
 			GETUTCDATE(),
 			@CreatedBy ,
@@ -49,11 +43,9 @@ INSERT INTO [dbo].[Role]
 	ELSE IF  @Action = 'UPDATE' 
 	BEGIN 
 	 UPDATE [dbo].[Role] SET
-       [RoleCode] = @RoleCode
-      ,[RoleName] = @RoleName
-      ,[RoleMenu] = @RoleMenu
+      [RoleName] = @RoleName
       ,[BaseControl] = @BaseControl
-      ,[RoleGroup] = @RoleGroup     
+      ,[RoleGroupCode] = @RoleGroupCode     
       ,[UpdatedTimeStamp] = GETUTCDATE()     
       ,[UpdatedBy] = @UpdatedBy
       ,[IsActive] = @IsActive

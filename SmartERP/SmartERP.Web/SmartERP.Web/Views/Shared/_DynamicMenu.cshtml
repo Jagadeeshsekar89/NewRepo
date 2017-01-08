@@ -17,16 +17,16 @@
        
 @if (Model != null && Model.Any())
 {
-    var parentMenus = Model.Where(i => string.IsNullOrEmpty(i.ParentMenucode)).ToList();
+    var parentMenus = Model.Where(i => i.ParentMenucode == 0).ToList();
     foreach (var item in parentMenus)
     {
         var controller = !string.IsNullOrEmpty(item.MenuURL) ? item.MenuURL.Split(',')[0] : string.Empty;
         var action = !string.IsNullOrEmpty(item.MenuURL) ? item.MenuURL.Split(',')[1] : string.Empty;
 
-        var childItems = Model.Any(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0) ? Model.Where(i => string.Compare(i.ParentMenucode, item.MenuCode) == 0).ToList() : new List<DynamicMenuViewModel>();
+        var childItems = Model.Any(i => i.ParentMenucode == item.Id) ? Model.Where(i => i.ParentMenucode == item.Id).ToList() : new List<DynamicMenuViewModel>();
         if (childItems != null && childItems.Any())
         {
-        <li class="@Html.RouteIf(action, "active") top-menu-invisible">
+        <li class="@Html.RouteIf(action, "active")">
             <a href="#"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">@item.MenuName</span></a>
             <ul>
                 @foreach (var childItem in childItems)
@@ -42,7 +42,7 @@
         }
         else {
         <li>
-            <a href="@Url.Action(action,controller)" title="Dashboard"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">@item.MenuName</span></a>
+            <a href="@Url.Action(action,controller)" title="Module"><i class="fa fa-lg fa-fw fa-cube txt-color-blue"></i> <span class="menu-item-parent">@item.MenuName</span></a>
         </li>
         }
     }

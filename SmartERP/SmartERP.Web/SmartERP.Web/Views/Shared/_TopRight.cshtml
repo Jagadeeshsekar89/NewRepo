@@ -10,7 +10,7 @@
     <ul id="mobile-profile-img" class="header-dropdown-list hidden-xs padding-5">
         <li class="">
             <a href="#" class="dropdown-toggle no-margin userdropdown" data-toggle="dropdown">
-                <img src="~/content/img/avatars/indian.png" alt="John Doe" class="online" />
+                <img src="@User.ImageUrl" alt="John Doe" class="online" style="height: 30px;" />
             </a>
             <ul class="dropdown-menu pull-right">
                 <li>
@@ -30,7 +30,7 @@
                 </li>
                 <li class="divider"></li>
                 <li>
-                    <a href="@Url.Action("changepassword", "account", new {userId= @User.UserId })" id="changePassword" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Change Password</a>
+                    <a href="@Url.Action("changepassword", "account", new {Id= @User.UserId })" id="changePassword" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Change Password</a>
                     @*<a href="javascript:void(0);" id="changePassword" class="padding-10 padding-top-0 padding-bottom-0"><i class="fa fa-cog"></i> Change Password</a>*@
                 </li>
                 <li class="divider"></li>

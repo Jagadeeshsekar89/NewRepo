@@ -129,8 +129,7 @@
                                                     <span>Top</span>
                                                 </label>
                                                 <label class="radio">
-                                                    @if ((selectedMenuSkin.Count() > 1 && string.IsNullOrEmpty(selectedMenuSkin[1])) ||
-selectedMenuSkin.Count() == 1)
+                                                    @if ((selectedMenuSkin.Count() > 1 && string.IsNullOrEmpty(selectedMenuSkin[1])) || selectedMenuSkin.Count() == 1)
                                                     {
                                                         <input type="radio" class="radiobox" name="menuPosition" checked="checked" value="">
                                                     }
@@ -151,13 +150,13 @@ selectedMenuSkin.Count() == 1)
                                                         <select name="roleCode" class="form-control">
                                                             @foreach (var role in User.roles)
                                                             {
-                                                                if (Session["PrimaryRoleCode"] != null && string.Compare(role.Split(',')[0], Session["PrimaryRoleCode"].ToString(), StringComparison.OrdinalIgnoreCase) == 0)
+                                                                if (Session["PrimaryRoleCode"] != null && role.ToString() == Session["PrimaryRoleCode"].ToString())
                                                                 {
-                                                                    <option selected="selected" value="@role.Split(',')[0]">@role.Split(',')[1]</option>
+                                                                    <option selected="selected" value="@role">@role</option>
                                                                 }
                                                                 else
                                                                 {
-                                                                    <option value="@role.Split(',')[0]">@role.Split(',')[1]</option>
+                                                                    <option value="@role">@role</option>
                                                                 }
                                                             }
                                                         </select>

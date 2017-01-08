@@ -1,8 +1,8 @@
 ﻿CREATE PROCEDURE [dbo].[SP_DML_RoleMenu]
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
-@RoleCode varchar(max)  =null,
-@MenuCode varchar(max) =null ,
+@RoleCode int  =null,
+@MenuCode int =null ,
 @CreatedTimeStamp datetime = null,
 @UpdatedTimeStamp datetime = null,
 @CreatedBy varchar(max)=null ,

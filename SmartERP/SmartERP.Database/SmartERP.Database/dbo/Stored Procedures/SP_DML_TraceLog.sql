@@ -2,7 +2,7 @@
 @Action VARCHAR(10) ='UPDATE',
 @Id int = 0,
 @AuditID UNIQUEIDENTIFIER  =null,
-@UserName varchar(max)  =null,
+@UserName int  =0,
 @IPAddress varchar(max)  =null,
 @AreaAccessed varchar(max)  =null, 
 @Message varchar(max)  =null, 

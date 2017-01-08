@@ -9,8 +9,8 @@ namespace SmartERP.Entity.Model.User
 {
     public class RoleMenu:BaseEntity
     {
-        public string RoleCode { get; set; }
-        public string MenuCode { get; set; }
+        public int RoleCode { get; set; }
+        public int MenuCode { get; set; }
 
     }
 }

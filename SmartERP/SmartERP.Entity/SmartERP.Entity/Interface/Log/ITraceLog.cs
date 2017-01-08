@@ -10,6 +10,6 @@ namespace SmartERP.Entity.Interface.Log
 {
     public interface ITraceLog
     {
-        List<TraceLog> GetByUserCode(string userCode);
+        List<TraceLog> GetByUserCode(int userCode);
     }
 }

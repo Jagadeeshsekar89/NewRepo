@@ -23,31 +23,34 @@ namespace SmartERP.Web.Controllers
             return View();
         }
 
-        public PartialViewResult DynamicMenu(string roleCode)
+        public PartialViewResult DynamicMenu(int? roleCode)
         {
             List<DynamicMenuViewModel> dynamicMenuList = new List<DynamicMenuViewModel>();
             if (((CustomPrincipal)HttpContext.User) != null)
             {
-                var userCode = ((CustomPrincipal)HttpContext.User).UserCode;
-                var dynamicMenus = _roleMenuRepository.GetUserRoleMenus(userCode);
-                if (dynamicMenus != null && dynamicMenus.Any())
+                var userCode = ((CustomPrincipal)HttpContext.User).UserId;
+                if (roleCode != null && roleCode.GetValueOrDefault() != 0)
                 {
-                    if (!string.IsNullOrEmpty(roleCode))
+                    var dynamicMenus = _userManagmentService.RoleMenuRepo.GetAll();
+                    if (dynamicMenus != null && dynamicMenus.Any())
+                    {
                         dynamicMenus = dynamicMenus.Where(i => i.RoleCode == roleCode).ToList();
 
-                    foreach (var item in dynamicMenus)
-                    {
-                        dynamicMenuList.Add(new DynamicMenuViewModel() { MenuCode = item.MenuCode, MenuName = item.MenuName, MenuURL = item.MenuURL, ParentMenucode = item.ParentMenucode });
+                        foreach (var item in dynamicMenus)
+                        {
+                            var menuItem = _userManagmentService.MenuRepo.Get(item.MenuCode);
+                            dynamicMenuList.Add(new DynamicMenuViewModel() { Id = menuItem.Id, MenuName = menuItem.MenuName, MenuURL = menuItem.MenuURL, ParentMenucode = menuItem.ParentMenucode });
+                        }
                     }
                 }
                 else
                 {
-                    var menuList = GetAllMenu();
+                    var menuList = _userManagmentService.MenuRepo.GetAll();
                     if (menuList != null && menuList.Any())
                     {
                         foreach (var item in menuList)
                         {
-                            dynamicMenuList.Add(new DynamicMenuViewModel() { MenuCode = item.MenuCode, MenuName = item.MenuName, MenuURL = item.MenuURL, ParentMenucode = item.ParentMenucode });
+                            dynamicMenuList.Add(new DynamicMenuViewModel() { Id = item.Id, MenuName = item.MenuName, MenuURL = item.MenuURL, ParentMenucode = item.ParentMenucode });
                         }
                     }
                 }
@@ -57,14 +60,13 @@ namespace SmartERP.Web.Controllers
 
         public PartialViewResult _Footer()
         {
-            ViewBag.LastActivity = "About 1 Day Ago";
+            ViewBag.LastActivity = "Last Login Date: " + DateTime.UtcNow.AddDays(-1).ToString("d");
             if (((CustomPrincipal)HttpContext.User) != null)
             {
-                List<TraceLog> log = _traceLogRepository.GetByUserCode(((CustomPrincipal)HttpContext.User).UserCode);
+                List<TraceLog> log = _traceLogRepository.GetByUserCode(((CustomPrincipal)HttpContext.User).UserId);
                 if (log != null && log.Any() && log.Count >= 2)
                 {
-                    var timedifference = DateTime.UtcNow - log.ElementAt(1).CreatedTimeStamp;
-                    ViewBag.LastActivity = "About " + Convert.ToInt32(timedifference.GetValueOrDefault().TotalHours).ToString() + " hours ago";
+                    ViewBag.LastActivity = "Last Login Date: " + log.ElementAt(1).CreatedTimeStamp.GetValueOrDefault().ToString("d");
                 }
             }
             return PartialView("_Footer");

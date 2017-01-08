@@ -1,11 +1,10 @@
 ﻿
 CREATE TABLE [dbo].[Menu](
-	[Id] [int] IDENTITY(1,1) NOT NULL,
-[MenuCode] [varchar](max) NULL,
-[MenuName] [varchar](max) NULL,
-[MenuURL] [varchar](max) NULL,
-[ParentMenucode] [varchar](max) NULL,
-[MenuType] [varchar](max) NULL,
+[Id] [int] IDENTITY(1,1) NOT NULL,
+[MenuName] [varchar](100) NOT NULL,
+[MenuURL] [varchar](200) NOT NULL,
+[ParentMenucode] [int] NULL,
+[MenuType] [varchar](50) NOT NULL,
 [CreatedTimeStamp][datetime] NOT NULL,
 [UpdatedTimeStamp][datetime] NOT NULL,
 [CreatedBy] [varchar](max) NULL,

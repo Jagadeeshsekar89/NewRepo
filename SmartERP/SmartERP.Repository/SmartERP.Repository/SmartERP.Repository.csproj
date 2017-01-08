@@ -53,12 +53,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Common\GeoService.cs" />
+    <Compile Include="Common\BusinessLocationService.cs" />
     <Compile Include="Common\ConfigurationService.cs" />
     <Compile Include="Common\UserManagmentService.cs" />
     <Compile Include="ConnectionMangement.cs" />
+    <Compile Include="Core\BranchRepository.cs" />
+    <Compile Include="Core\GeoRepository.cs" />
     <Compile Include="Core\CountryRepository.cs" />
     <Compile Include="Core\GenericRepository.cs" />
     <Compile Include="Core\MenuRepository.cs" />
+    <Compile Include="Core\BusinessLocationRepository.cs" />
     <Compile Include="Core\UserMenuRepository.cs" />
     <Compile Include="Core\RoleUserRepository.cs" />
     <Compile Include="Core\RoleMenuRepository.cs" />
@@ -67,6 +72,8 @@
     <Compile Include="Core\NotificationRepository.cs" />
     <Compile Include="Core\CompanyRepository.cs" />
     <Compile Include="Core\UserRepository.cs" />
+    <Compile Include="Core\WorkFlowApprovalsRepository.cs" />
+    <Compile Include="Core\WorkFlowFormRepository.cs" />
     <Compile Include="Log\TraceLogRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Utility\RuleExecutor.cs" />

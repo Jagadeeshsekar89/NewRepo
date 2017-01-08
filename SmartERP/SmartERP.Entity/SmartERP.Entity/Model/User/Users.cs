@@ -11,10 +11,9 @@ namespace SmartERP.Entity.Model.User
 
     public class Users : BaseEntity
     {
-        public string UserCode { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
-        public string SSO { get; set; }
+        public bool SSO { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
         public DateTime? PasswordExpiryDate { get; set; }
@@ -24,8 +23,5 @@ namespace SmartERP.Entity.Model.User
         public string MobileNumber { get; set; }
         public string ImageUrl { get; set; }
         public bool IsLocked { get; set; }
-
-       
-
     }
 }

@@ -1,8 +1,7 @@
 ﻿
 CREATE TABLE [dbo].[RoleGroup](
 	[Id] [int] IDENTITY(1,1) NOT NULL,
-	[RoleGroupCode] [varchar](max) NULL,
-[RoleGroupValue] [varchar](max) NULL,
+[RoleGroupName] [varchar](50) NULL,
 [CreatedTimeStamp][datetime] NOT NULL,
 [UpdatedTimeStamp][datetime] NOT NULL,
 [CreatedBy] [varchar](max) NULL,

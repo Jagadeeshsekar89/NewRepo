@@ -1,134 +1,109 @@
-﻿USE [SmartERP.database]
+﻿USE [SmartERP.Database]
 GO
 IF NOT EXISTS( SELECT TOP 1 * FROM MENU) 
 BEGIN 
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Dashboard', N'Dashboard', N'home,index', N'', N'Module', CAST(N'2016-12-11 23:40:11.097' AS DateTime), CAST(N'2016-12-11 23:40:11.097' AS DateTime), N'admin', N'admin', 1)
 
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Users', N'Users', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.097' AS DateTime), CAST(N'2016-12-11 23:40:11.097' AS DateTime), N'admin', N'admin', 1)
+INSERT [dbo].[RoleGroup] ([RoleGroupName], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Finance', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Role] ([RoleName], [BaseControl], [RoleGroupCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'HO Admin', N'B', 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Role] ([RoleName], [BaseControl], [RoleGroupCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Branch Manager', N'B', 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Role] ([RoleName], [BaseControl], [RoleGroupCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Branch Operations', N'B', 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Dashboard', N'', 0, N'Module', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Application Settings', N'', 0, N'Module', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Sales Configuration', N'', 0, N'Module', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Sales Transaction', N'', 0, N'Module', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Sales Reports', N'', 0, N'Module', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Stock Dashboard', N'home,index', 1, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Accounts Dashboard', N'home,index', 1, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Sales Dashboard', N'home,index', 1, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Service Dashboard', N'home,index', 1, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Security Policy', N'misc,privacypolicy', 2, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Manage User', N'account,users', 2, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'User Roles & Rights', N'misc,roles', 2, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Unlock User Account', N'account,unlockusers', 2, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Company', N'configuration,companies', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Business Center', N'businesslocation,businesscenters', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Tax Structure', N'', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Product Trade Discount', N'', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Branch Controls', N'', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DealerControls', N'', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Dealer Flexi Trade Discount', N'', 3, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Order Policy', N'', 4, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Discount Policy', N'', 4, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Priority & Allocation', N'', 4, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Invoice', N'', 4, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'EOD Process', N'', 4, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Print Invoice', N'', 5, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Trade Discount', N'', 5, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[Menu] ( [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Dealer Flexi Trade Discount', N'', 5, N'Menu', GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 2, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 3, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 4, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 5, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 6, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 7, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 8, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 9, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 10, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 11, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 12, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 13, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 14, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 15, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 16, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 17, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 18, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 19, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 20, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 21, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 22, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 23, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 24, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 25, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 26, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 27, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (1, 28, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 3, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 4, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 5, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 6, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 7, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 8, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 9, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 18, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 19, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 20, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 23, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 24, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 25, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 26, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 27, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (2, 28, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+
+
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 1, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 4, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 5, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 6, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 7, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 8, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 9, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 24, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 26, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 27, GETDATE(), GETDATE(), N'admin', N'admin', 1)
+INSERT [dbo].[RoleMenu] ([RoleCode], [MenuCode], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (3, 28, GETDATE(), GETDATE(), N'admin', N'admin', 1)
 
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Transporter', N'Transporter', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.097' AS DateTime), CAST(N'2016-12-11 23:40:11.097' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Bank', N'Bank', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.097' AS DateTime), CAST(N'2016-12-11 23:40:11.097' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Customer', N'Customer', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.097' AS DateTime), CAST(N'2016-12-11 23:40:11.097' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Settings', N'Settings', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Company', N'Company', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'BranchControls', N'Bracnch Controls', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'AccountsMaster', N'Accounts Master', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Dealer', N'Dealer ', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ServiceStation', N'Service Station', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'OutsideSupplier', N'Outside Supplier', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Staff', N'Staff', N'', N'', N'Module', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'PrivacyPolicy', N'Privacy & Policy', N'misc,privacypolicy', N'Settings', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Roles', N'Roles', N'misc,roles', N'Settings', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Preference', N'Preference', N'', N'Settings', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'HeadOffice', N'Head Office', N'', N'Company', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'HoUnit', N'HO Unit', N'', N'Company', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'SalesPoint', N'Sales Point', N'', N'Company', N'Menu', CAST(N'2016-12-11 23:40:11.100' AS DateTime), CAST(N'2016-12-11 23:40:11.100' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CommonCustomer', N'Common Customer', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CustomerControls', N'Customer Controls', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ServiceCharge', N'Service Charge', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'GraceDays', N'Grace Days', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CreditDays', N'Credit Days', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DebitNote', N'Debit Note BCD Days', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'BranchMaster', N'Branch Master', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CompanyMaster', N'Company Master', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.103' AS DateTime), CAST(N'2016-12-11 23:40:11.103' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DocumentMaster', N'Document Master', N'', N'BranchControls', N'Menu', CAST(N'2016-12-11 23:40:11.107' AS DateTime), CAST(N'2016-12-11 23:40:11.107' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'AccountGroup', N'Account Group', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.107' AS DateTime), CAST(N'2016-12-11 23:40:11.107' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'BankLedger', N'Bank Ledger', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.107' AS DateTime), CAST(N'2016-12-11 23:40:11.107' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'BankChallanType', N'SBank Challan Type', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.107' AS DateTime), CAST(N'2016-12-11 23:40:11.107' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'GeneralLedger', N'General Ledger', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.107' AS DateTime), CAST(N'2016-12-11 23:40:11.107' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'OutsideSupplier', N'Outside Supplier', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ExpenditureLedger', N'Expenditure Ledger', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ExpenditureBreakup', N'Expenditure Breakup', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'NarrationsList', N'Narrations List', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'GJVControl', N'GJV Control', N'', N'AccountsMaster', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'SalesAccount', N'Sales Account', N'', N'Dealer', N'Menu', CAST(N'2016-12-11 23:40:11.110' AS DateTime), CAST(N'2016-12-11 23:40:11.110' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DepositAccount', N'Deposit Account', N'', N'Dealer', N'Menu', CAST(N'2016-12-11 23:40:11.113' AS DateTime), CAST(N'2016-12-11 23:40:11.113' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ECMSVirtual', N'ECMS Virtual A/c No entry', N'', N'Dealer', N'Menu', CAST(N'2016-12-11 23:40:11.113' AS DateTime), CAST(N'2016-12-11 23:40:11.113' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'SalesAccount', N'Sales Account', N'', N'ServiceStation', N'Menu', CAST(N'2016-12-11 23:40:11.113' AS DateTime), CAST(N'2016-12-11 23:40:11.113' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DepositAccount', N'Deposit Account', N'', N'ServiceStation', N'Menu', CAST(N'2016-12-11 23:40:11.113' AS DateTime), CAST(N'2016-12-11 23:40:11.113' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ECMSVirtual', N'ECMS Virtual A/c No entry', N'', N'ServiceStation', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'MaterialTransferAccount', N'Material Transfer Account', N'', N'ServiceStation', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ServiceBillAccount', N'Service Bill Account', N'', N'ServiceStation', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Purchase Account', N'Purchase Account', N'', N'OutsideSupplier', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'DepositAccount', N'Deposit Account', N'', N'OutsideSupplier', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'MaterialTransferAccount', N'Material Transfer Account', N'', N'OutsideSupplier', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'MainAccount', N'Main Account', N'', N'Staff', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'AdvanceTransferAccount', N'Advance Transfer Account', N'', N'Staff', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ECMSVirtual', N'ECMS Virtual A/c No entry', N'', N'Staff', N'Menu', CAST(N'2016-12-11 23:40:11.117' AS DateTime), CAST(N'2016-12-11 23:40:11.117' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'MaterialTransferAccount', N'Material Transfer Account', N'', N'Staff', N'Menu', CAST(N'2016-12-11 23:40:11.120' AS DateTime), CAST(N'2016-12-11 23:40:11.120' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ServiceBillAccount', N'Service Bill Account', N'', N'Staff', N'Menu', CAST(N'2016-12-11 23:40:11.120' AS DateTime), CAST(N'2016-12-11 23:40:11.120' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'LockedUsers', N'Locked Users', N'account,unlockusers', N'Users', N'Menu', CAST(N'2016-12-11 23:40:11.120' AS DateTime), CAST(N'2016-12-11 23:40:11.120' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Menu] ([MenuCode], [MenuName], [MenuURL], [ParentMenucode], [MenuType], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'ManageUsers', N'Manage Users', N'account,users', N'Users', N'Menu', CAST(N'2016-12-11 23:40:11.120' AS DateTime), CAST(N'2016-12-11 23:40:11.120' AS DateTime), N'admin', N'admin', 1)
-
-
-INSERT [dbo].[Role] ([RoleCode], [RoleName], [RoleMenu], [BaseControl], [RoleGroup], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CRIR001', N'HO Admin', N'Fixed', N'Branch', N'Technical', CAST(N'2016-12-15 22:48:46.810' AS DateTime), CAST(N'2016-12-15 22:48:46.810' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Role] ([RoleCode], [RoleName], [RoleMenu], [BaseControl], [RoleGroup], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CRIR002', N'Branch Admin', N'Dynamic', N'Branch', N'Technical', CAST(N'2016-12-15 22:48:46.830' AS DateTime), CAST(N'2016-12-15 22:48:46.830' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[Role] ([RoleCode], [RoleName], [RoleMenu], [BaseControl], [RoleGroup], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'CRIR003', N'Branch Operations', N'Dynamic', N'Branch', N'Technical', CAST(N'2016-12-15 22:48:46.830' AS DateTime), CAST(N'2016-12-15 22:48:46.830' AS DateTime), N'admin', N'admin', 1)
-
-
-INSERT [dbo].[RoleGroup] ([RoleGroupCode], [RoleGroupValue], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Finance', N'Finance', CAST(N'2016-12-15 22:48:54.560' AS DateTime), CAST(N'2016-12-15 22:48:54.560' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[RoleGroup] ([RoleGroupCode], [RoleGroupValue], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Marketing', N'Marketing', CAST(N'2016-12-15 22:48:54.593' AS DateTime), CAST(N'2016-12-15 22:48:54.593' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[RoleGroup] ([RoleGroupCode], [RoleGroupValue], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Operations', N'Operations', CAST(N'2016-12-15 22:48:54.667' AS DateTime), CAST(N'2016-12-15 22:48:54.667' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[RoleGroup] ([RoleGroupCode], [RoleGroupValue], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Zone', N'Zone', CAST(N'2016-12-15 22:48:54.670' AS DateTime), CAST(N'2016-12-15 22:48:54.670' AS DateTime), N'admin', N'admin', 1)
-
-INSERT [dbo].[RoleGroup] ([RoleGroupCode], [RoleGroupValue], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (N'Technical', N'Technical', CAST(N'2016-12-15 22:48:54.670' AS DateTime), CAST(N'2016-12-15 22:48:54.670' AS DateTime), N'admin', N'admin', 1)
-
+INSERT [dbo].[Security] ([MinLength], [MaxLength], [ExpiryDays], [LockoutCount], [SessionTimeoutWorkforce], [SessionTimeoutOthers], [IsAlphaMust], [IsNumericMust], [IsSplCharMust], [IsFirstPwdChange], [IsVirtualKeyboard], [IsIpRestricted], [IsCaptchaRequired], [IsForgotPassword], [IsCloseBrowser], [IsAutoLogout], [IpAddress], [RemoteAccess], [CreatedTimeStamp], [UpdatedTimeStamp], [CreatedBy], [UpdatedBy], [IsActive]) VALUES (8, 16, 60, 5, 0, 0, 0, 0, 1, 0, 1, 0, 0, 1, 0, 0, N'123.23.21.24', N'2', GETDATE(), GETDATE(), NULL, NULL, 0)
 
 END
